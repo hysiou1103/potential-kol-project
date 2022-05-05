@@ -1,0 +1,13 @@
+@mixin desk {
+  @media (min-width:1280px) {
+    @content
+  }
+}
+
+;
+
+@mixin ipad {
+  @media (min-width:768px) {
+    @content
+  }
+}

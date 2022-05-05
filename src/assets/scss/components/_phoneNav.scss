@@ -1,0 +1,9 @@
+.phoneNav {
+  position: sticky;
+  bottom: 0;
+  background-color: $primary;
+
+  @include ipad {
+    display: none;
+  }
+}

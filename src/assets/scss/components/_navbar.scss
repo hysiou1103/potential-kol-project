@@ -1,0 +1,53 @@
+header {
+  display: none;
+  position: sticky;
+  top: 0;
+  background-color: $primary;
+  color: white;
+
+  @include ipad {
+    display: block;
+  }
+
+  .logo {
+    width: 20%;
+  }
+}
+
+.navWrap {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.linkWrap {
+  width: 80%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  font-size: 1.6rem;
+
+  nav {
+    display: flex;
+
+    & li:nth-child(4) a {
+      position: relative;
+
+      & ::after {
+        content: '';
+        position: absolute;
+      }
+    }
+  }
+
+  a {
+    padding: 0 5px;
+  }
+
+}
+
+.phoneNav {
+  position: sticky;
+  bottom: 0;
+  background-color: $primary;
+}
