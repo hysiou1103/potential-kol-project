@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/potential-kol-project/static/css/main.92261705.css",
+    "main.js": "/potential-kol-project/static/js/main.ea8242b7.js",
+    "static/js/787.61f2d9ba.chunk.js": "/potential-kol-project/static/js/787.61f2d9ba.chunk.js",
+    "index.html": "/potential-kol-project/index.html",
+    "main.92261705.css.map": "/potential-kol-project/static/css/main.92261705.css.map",
+    "main.ea8242b7.js.map": "/potential-kol-project/static/js/main.ea8242b7.js.map",
+    "787.61f2d9ba.chunk.js.map": "/potential-kol-project/static/js/787.61f2d9ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92261705.css",
+    "static/js/main.ea8242b7.js"
+  ]
+}
