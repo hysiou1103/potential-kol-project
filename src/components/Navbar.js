@@ -3,38 +3,40 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/imgs/Logo.png";
 import fbIcon from "../assets/imgs/fb-icon.png";
 import lineIcon from "../assets/imgs/line-icon.png";
-import signUp from "../assets/imgs/signUp.png";
-import vote from "../assets/imgs/vote.png";
-
-
 
 export const Navbar = () => { 
+
   return (
-    <>
-      <header>
-        <div className="container navWrap">
-          <Link to="/" className='logo'>
-            <img src={Logo} alt="ETmall" />
-          </Link>
-          <div className="linkWrap">
-            <nav>
-              <li><a href="#">我要報名</a></li>
-              <li><a href="#">我要投票</a></li>
-            </nav>
-            <div className="flex">
-              <a href="#">
-                <img src={fbIcon} alt="Facebook Sharing Icon" />
-              </a>
-              <a href="#">
-                <img src={lineIcon} alt="Line Sharing Icon" />
-              </a>
-            </div>
+    <header>
+      <div className="container navWrap">
+        <Link to="/" title='ETmall' className='logo'>
+          <img src={Logo} alt="ETmall" width="115px" height="40px" />
+        </Link>
+        <div className="linkWrap">
+          <nav>
+            <ul>
+              <li>
+                <Link to="/" title='我要報名'>
+                  我要報名
+                </Link>
+              </li>
+              <li>
+                <Link to="/" title='我要投票'>
+                  我要投票
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <div className="flex">
+            <a href="#">
+              <img src={fbIcon} alt="Facebook Sharing Icon" width="30px" height="30px" />
+            </a>
+            <a href="#">
+              <img src={lineIcon} alt="Line Sharing Icon" width="30px" height="30px" />
+            </a>
           </div>
         </div>
-      </header>
-    </>
-
-    
-)
-
+      </div>
+    </header>
+  )
 }

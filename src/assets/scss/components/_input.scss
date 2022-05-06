@@ -1,0 +1,19 @@
+label {
+  grid-column: 1/1;
+  width: 140px;
+  padding: 8px 0;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary;
+  color: white;
+}
+
+input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 2px solid $primary;
+  outline-width: 2px;
+  outline-color: rgba($primary, 0.4);
+}

@@ -2,52 +2,37 @@ header {
   display: none;
   position: sticky;
   top: 0;
+  padding: 0 10px;
   background-color: $primary;
   color: white;
 
   @include ipad {
     display: block;
   }
-
-  .logo {
-    width: 20%;
-  }
 }
 
 .navWrap {
   display: flex;
   align-items: center;
-  padding: 10px;
+  justify-content: space-between;
 }
 
 .linkWrap {
-  width: 80%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   font-size: 1.6rem;
 
-  nav {
+  ul {
     display: flex;
 
-    & li:nth-child(4) a {
-      position: relative;
-
-      & ::after {
-        content: '';
-        position: absolute;
-      }
+    li a:hover {
+      background-color: rgba(0, 0, 0, 0.2);
     }
   }
 
   a {
-    padding: 0 5px;
+    padding: 10px 5px;
   }
 
-}
-
-.phoneNav {
-  position: sticky;
-  bottom: 0;
-  background-color: $primary;
 }

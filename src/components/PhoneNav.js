@@ -8,18 +8,18 @@ import vote from "../assets/imgs/vote.png";
 export const PhoneNav = () => { 
   return (
     <nav className='phoneNav'>
-      <ul className='flex items-center'>
+      <ul>
         <li>
-          <a href="#" className='flex flex-col'>
-            <img src={signUp} alt="" />
+          <Link to="/" title='我要報名'>
+            <img src={signUp} alt="Sign Up Link" width="24px" height="24px" />
             我要報名
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className='flex flex-col'>
-            <img src={vote} alt="" />
+          <Link to="/" title='我要投票'>
+            <img src={vote} alt="Voting Link" width="24px" height="24px" />
             我要投票
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

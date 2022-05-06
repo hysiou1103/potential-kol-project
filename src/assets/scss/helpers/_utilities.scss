@@ -8,6 +8,7 @@ $bg:#ffc9e6;
 
 a {
   color: white;
+  display: inline-block;
 }
 
 .container {
@@ -21,9 +22,20 @@ a {
 
 .flex-col {
   flex-direction: column;
+}
+
+.items-center {
   align-items: center;
+}
+
+.justify-center {
   justify-content: center;
 }
+
+.col-4 {
+  grid-column: 2/6;
+}
+
 
 .relative {
   position: relative;

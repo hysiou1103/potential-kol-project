@@ -1,9 +1,23 @@
 .phoneNav {
   position: sticky;
   bottom: 0;
+  border-radius: 15px 15px 0 0;
   background-color: $primary;
 
   @include ipad {
     display: none;
+  }
+
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 7px 15px;
   }
 }

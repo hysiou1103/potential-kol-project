@@ -112,9 +112,10 @@ html {
   font-size: 10px;
 }
 
-body {
+body,
+input {
   line-height: 1;
-  font-family: '微軟正黑體';
+  font-family: '微軟正黑體', Arial, Helvetica, sans-serif;
 }
 
 ol,

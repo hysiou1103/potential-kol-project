@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom"
 import { Home } from './page/Home'
 import { Navbar } from './components/Navbar'
 import { PhoneNav } from './components/PhoneNav'
@@ -12,7 +12,6 @@ function App() {
         <Route path="/" element={<Home />} />
       </Routes>
       <PhoneNav/>
-
     </div>
   );
 }
