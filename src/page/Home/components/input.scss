@@ -1,0 +1,18 @@
+.inputGroup,
+.selectGroup {
+  input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 2px solid $primary;
+    outline-width: 2px;
+    outline-color: rgba($primary, 0.4);
+  }
+}
+
+.errMsg {
+  padding: 5px 0;
+  text-indent: 1rem;
+  font-size: 1.6rem;
+  color: $alert;
+}

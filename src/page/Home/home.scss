@@ -17,3 +17,12 @@
     display: none;
   }
 }
+
+.formSection {
+  padding: 0 15px;
+
+  @include ipad {
+    padding: 0;
+  }
+
+}

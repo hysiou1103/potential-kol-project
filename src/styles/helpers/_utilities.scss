@@ -12,7 +12,8 @@ a {
 }
 
 .container {
-  max-width: 960px;
+  max-width: 990px;
+  padding: 0 15px;
   margin: 0 auto;
 }
 
@@ -31,11 +32,6 @@ a {
 .justify-center {
   justify-content: center;
 }
-
-.col-4 {
-  grid-column: 2/6;
-}
-
 
 .relative {
   position: relative;

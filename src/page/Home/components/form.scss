@@ -1,0 +1,117 @@
+.formWrap {
+  width: 100%;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 15px;
+  background-color: white;
+  font-size: 1.6rem;
+
+  @include ipad {
+    padding: 50px;
+  }
+}
+
+.inputGroup,
+.selectGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin: 10px 0;
+
+  @include ipad {
+    gap: 10px;
+  }
+
+  label {
+    width: 100%;
+    padding: 8px 0;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: $primary;
+    background-color: transparent;
+
+    @include ipad {
+      width: 20%;
+      justify-content: center;
+      font-size: 2rem;
+      background-color: $primary;
+      color: white;
+    }
+  }
+}
+
+.inputWrap {
+  width: 100%;
+
+  &.full {
+    @include ipad {
+      width: calc(80% - 20px);
+    }
+  }
+
+  @include ipad {
+    width: 30%;
+  }
+
+}
+
+.selectWrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @include ipad {
+    width: calc(80% - 20px);
+  }
+}
+
+.addressReminder {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.6rem;
+  color: $gray;
+  background-color: #f7f7f7;
+}
+
+.policyAgreement {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+
+  @include ipad {
+    padding: 0 10px;
+  }
+}
+
+.checkboxGroup {
+  width: 100%;
+  display: inline-flex;
+
+  @include ipad {
+    width: 80%;
+  }
+
+  input {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  label {
+    width: calc(100% - 20px);
+    line-height: 1.5;
+    font-size: 1.6rem;
+    color: $gray;
+  }
+
+  a {
+    text-decoration: underline;
+    color: $primary;
+  }
+}
