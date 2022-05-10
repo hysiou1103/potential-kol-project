@@ -2,9 +2,10 @@
 @import './helpers/mixin';
 @import './helpers/utilities';
 
-@import 'page/Home/home';
-@import 'components/navigation/navbar';
-@import 'components/navigation/phoneNav';
+
 @import 'page/Home/components/form';
 @import 'page/Home/components/input';
 @import 'page/Home/components/selector';
+@import 'components/navigation/navbar';
+@import 'components/navigation/phoneNav';
+@import 'page/Home/home';
