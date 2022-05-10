@@ -4,7 +4,7 @@ import Logo from 'imgs/Logo.png'
 import fbIcon from 'imgs/fb-icon.png'
 import lineIcon from 'imgs/line-icon.png'
 
-export const Navbar = () => {
+export default function Navbar() {
   return (
     <header>
       <div className="container navWrap">

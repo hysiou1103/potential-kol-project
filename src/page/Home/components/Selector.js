@@ -1,47 +1,18 @@
 import React, { useState } from 'react'
-import { groupArr } from 'constant'
-import { years } from 'constant'
+import { groupArr, years, months, days } from 'constant'
 
-const dateOptionRender = type => {
-  switch (type) {
-    case 'year':
-      return (
-        <>
-          <option defaultValue>西元年</option>
-          {years.map(item => (
-            <option value={item} key={item}>
-              {item}
-            </option>
-          ))}
-        </>
-      )
-      break
-
-    default:
-      break
-  }
-}
-
-const groupOptionRender = () => (
-  <>
-    <option defaultValue>請選擇</option>
-    {groupArr.map(item => (
-      <option value={item.value} key={item.value}>
-        {item.label}
-      </option>
-    ))}
-  </>
-)
-
-export const Selector = props => {
-  const [selectedVal, setSelectedVal] = useState('')
+export default function Selector(props) {
+  const [selectedVal, setSelectedVal] = useState('default')
   const handleOption = type => {
     switch (type) {
-      case 'year':
-        return dateOptionRender(type)
-      case 'group':
+      case 'years':
+        return yearOptionRender()
+      case 'months':
+        return monthOptionRender()
+      case 'days':
+        return daysOptionRender()
+      case 'groups':
         return groupOptionRender()
-
       default:
         break
     }
@@ -54,11 +25,58 @@ export const Selector = props => {
       id={props.value}
       value={selectedVal}
       onChange={handleChange}
-      className={`${props.width === '1/3' ? 'oneThird' : null} ${
-        props.width === '1/2' ? 'oneHalf' : null
-      }`}
+      className={`${props.width === '1/3' ? 'oneThird' : props.width === '1/2' ? 'oneHalf' : null}`}
     >
       {handleOption(props.value)}
     </select>
   )
 }
+
+const yearOptionRender = () => (
+  <>
+    <option value="default" disabled>
+      西元年
+    </option>
+    {years.map(item => (
+      <option value={item} key={item}>
+        {item}
+      </option>
+    ))}
+  </>
+)
+const monthOptionRender = () => (
+  <>
+    <option value="default" disabled>
+      月
+    </option>
+    {months.map(item => (
+      <option value={item} key={item}>
+        {item}
+      </option>
+    ))}
+  </>
+)
+const daysOptionRender = () => (
+  <>
+    <option value="default" disabled>
+      日
+    </option>
+    {days.map(item => (
+      <option value={item} key={item}>
+        {item}
+      </option>
+    ))}
+  </>
+)
+const groupOptionRender = () => (
+  <>
+    <option value="default" disabled>
+      請選擇
+    </option>
+    {groupArr.map(item => (
+      <option value={item.value} key={item.value}>
+        {item.label}
+      </option>
+    ))}
+  </>
+)

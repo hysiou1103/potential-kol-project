@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import signUp from 'imgs/signUp.png'
 import vote from 'imgs/vote.png'
 
-export const PhoneNav = () => {
+export default function PhoneNav() {
   return (
     <nav className="phoneNav">
       <ul>

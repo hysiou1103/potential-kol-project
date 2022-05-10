@@ -1,10 +1,10 @@
 import React from 'react'
-import { Form } from './components/Form'
+import Form from './components/Form'
 import phoneLogo from 'imgs/phoneLogo.png'
 import banner from 'imgs/banner.png'
 import signUpForm from 'imgs/signUpForm.png'
 
-export const Home = () => {
+export default function Home() {
   return (
     <section className="home relative">
       <div className="container flex flex-col items-center relative">

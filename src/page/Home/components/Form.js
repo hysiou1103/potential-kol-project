@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Input } from './Input'
-import { Selector } from './Selector'
+import Input from './Input'
+import Selector from './Selector'
 
-export const Form = () => {
+export default function Form() {
   const [privacy, setPrivacy] = useState(false)
   const [portrait, setPortrait] = useState(false)
 
@@ -32,7 +32,7 @@ export const Form = () => {
       <div className="selectGroup">
         <label htmlFor="group">報名組別</label>
         <div className="selectWrap">
-          <Selector value="group" />
+          <Selector value="groups" />
         </div>
       </div>
       <div className="inputGroup">
@@ -53,11 +53,11 @@ export const Form = () => {
         </div>
       </div>
       <div className="selectGroup">
-        <label htmlFor="year">出生年月日</label>
+        <label htmlFor="years">出生年月日</label>
         <div className="selectWrap">
-          <Selector value="year" width="1/3" />
-          <Selector value="month" width="1/3" />
-          <Selector value="day" width="1/3" />
+          <Selector value="years" width="1/3" />
+          <Selector value="months" width="1/3" />
+          <Selector value="days" width="1/3" />
         </div>
       </div>
       <div className="selectGroup">
