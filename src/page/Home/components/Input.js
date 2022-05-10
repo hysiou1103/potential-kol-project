@@ -9,11 +9,10 @@ export const Input = props => {
     setProcessVal(e.target.value.trim())
   }
   const handleValidate = e => {
-    if (!initialVal) return
     let reg = ''
     switch (props.value) {
       case 'name':
-        const initialName = initialVal
+        const initialName = initialVal.split('')
         initialName.forEach((item, index, arr) => {
           index % 2 === 0 ? (arr[index] = '*') : (arr[index] = item)
         })
@@ -21,7 +20,7 @@ export const Input = props => {
         setProcessVal(newName)
         break
       case 'email':
-        const accountArr = initialVal.split('@')[0].split('')
+        const accountArr = initialVal.split('@')[0]
         const suffix = initialVal.split('@')[1]
         accountArr.forEach((item, index, arr) => {
           index % 2 === 1 ? (arr[index] = '*') : (arr[index] = item)
