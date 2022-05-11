@@ -2,12 +2,21 @@
   @media (min-width:1280px) {
     @content
   }
-}
-
-;
+};
 
 @mixin ipad {
   @media (min-width:768px) {
     @content
   }
-}
+};
+
+@mixin commonBtn($bg ,$color ,$width, $height){
+  width: $width;
+  height: $height;
+  line-height: $height ;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  color: $color;
+  background-color: $bg;
+};

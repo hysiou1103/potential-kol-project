@@ -12,7 +12,8 @@
 }
 
 .inputGroup,
-.selectGroup {
+.selectGroup,
+.uploadGroup {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -69,6 +70,35 @@
   }
 }
 
+.uploadWrap{
+  display: flex;
+  gap:10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.uploadBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor:pointer;
+  font-size:1.8rem;
+  font-weight: bold;
+  @include commonBtn($secondary, white , 141px, 44px);
+  span{
+    margin-left:5px
+  }
+}
+
+.fileInfor {
+  line-height: 1.5;
+  color :$gray;
+  & p:nth-child(2){
+    font-size: 1.6rem;
+    color: #5d5d5d;
+  }
+}
+
 .addressReminder {
   width: 100%;
   padding: 10px;
@@ -78,14 +108,14 @@
 }
 
 .policyAgreement {
-  padding: 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 5px;
 
   @include ipad {
-    padding: 0 10px;
+    padding:20px 10px;
   }
 }
 
@@ -112,5 +142,15 @@
     cursor: pointer;
     text-decoration: underline;
     color: $primary;
+  }
+}
+.formBtn{
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  font-size: 1.8rem;
+  @include commonBtn($primary, white , 112px, 44px);
+  &.disabled{
+    cursor: not-allowed;
   }
 }

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { groups, years, months, days, town } from 'config'
+import { groups, years, months, days, cityList } from 'config'
 
 export default function Selector(props) {
   const [selectedVal, setSelectedVal] = useState('default')
 
   const handleChange = e => {
-    const { composeInformation, name } = props
+    const { createList, name } = props
     setSelectedVal(e.target.value)
-    composeInformation(name, e.target.value)
+    createList(name, e.target.value)
   }
 
   const createOption = ({ name, city }) => {
@@ -52,7 +52,7 @@ const updateClassName = width => {
 }
 
 const cityOptionRender = () => {
-  const cityArr = town.map(item => item.city)
+  const cityArr = cityList.map(item => item.Name)
   return (
     <>
       <option value="default" disabled>
@@ -68,19 +68,18 @@ const cityOptionRender = () => {
 }
 
 const districtOptionRender = city => {
-  //  const districtIndex = town.findIndex(item => {
-  //   item.city === city
-  // })
+  const cityIndex = cityList.findIndex(item => item.Name === city)
   return (
     <>
       <option value="default" disabled>
         請選擇鄉鎮
       </option>
-      {city && (
-        <option value="default" disabled>
-          ㄏㄏ
-        </option>
-      )}
+      {cityIndex !== -1 &&
+        cityList[cityIndex].AreaList.map(item => (
+          <option value={item.ZipCode} key={item.ZipCode}>
+            {item.Name}
+          </option>
+        ))}
     </>
   )
 }
