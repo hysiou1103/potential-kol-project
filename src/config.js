@@ -511,5 +511,6 @@ export const requiredItem = [
   'days',
   'city',
   'district',
-  'detailAddress'
+  'detailAddress',
+  'photo1'
 ]

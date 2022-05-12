@@ -14,7 +14,7 @@ export default function PhoneNav() {
           </Link>
         </li>
         <li>
-          <Link to="/" title="我要投票">
+          <Link to="/votingActive" title="我要投票">
             <img src={vote} alt="Voting Link" width="24px" height="24px" />
             我要投票
           </Link>

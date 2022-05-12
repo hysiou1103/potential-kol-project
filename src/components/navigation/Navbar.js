@@ -20,7 +20,7 @@ export default function Navbar() {
                 </Link>
               </li>
               <li>
-                <Link to="/" title="我要投票">
+                <Link to="/votingActive" title="我要投票">
                   我要投票
                 </Link>
               </li>

@@ -3,14 +3,13 @@ import { groups, years, months, days, cityList } from 'config'
 
 export default function Selector(props) {
   const [selectedVal, setSelectedVal] = useState('default')
-
+  const { createList = () => {}, name = '', city = '', width = '' } = props
   const handleChange = e => {
-    const { createList, name } = props
     setSelectedVal(e.target.value)
     createList(name, e.target.value)
   }
 
-  const createOption = ({ name, city }) => {
+  const createOption = () => {
     switch (name) {
       case 'years':
         return dateOptionRender('西元年', years)
@@ -19,11 +18,11 @@ export default function Selector(props) {
       case 'days':
         return dateOptionRender('日', days)
       case 'groups':
-        return groupOptionRender()
+        return groupOptionRender('請選擇', groups)
       case 'city':
-        return cityOptionRender()
+        return cityOptionRender('請選擇縣市', cityArr)
       case 'district':
-        return districtOptionRender(city)
+        return districtOptionRender('請選擇鄉鎮', city)
       default:
         break
     }
@@ -31,15 +30,17 @@ export default function Selector(props) {
 
   return (
     <select
-      id={props.name}
+      id={name}
       value={selectedVal}
       onChange={handleChange}
-      className={updateClassName(props.width)}
+      className={updateClassName(width)}
     >
-      {createOption(props)}
+      {createOption()}
     </select>
   )
 }
+
+const cityArr = cityList.map(item => item.Name)
 
 const updateClassName = width => {
   if (width === '1/3') {
@@ -51,14 +52,13 @@ const updateClassName = width => {
   }
 }
 
-const cityOptionRender = () => {
-  const cityArr = cityList.map(item => item.Name)
+const cityOptionRender = (placeHolder, cityData) => {
   return (
     <>
       <option value="default" disabled>
-        請選擇縣市
+        {placeHolder}
       </option>
-      {cityArr.map((item, index) => (
+      {cityData.map((item, index) => (
         <option value={item} key={index}>
           {item}
         </option>
@@ -67,12 +67,12 @@ const cityOptionRender = () => {
   )
 }
 
-const districtOptionRender = city => {
+const districtOptionRender = (placeHolder, city) => {
   const cityIndex = cityList.findIndex(item => item.Name === city)
   return (
     <>
       <option value="default" disabled>
-        請選擇鄉鎮
+        {placeHolder}
       </option>
       {cityIndex !== -1 &&
         cityList[cityIndex].AreaList.map(item => (
@@ -84,12 +84,12 @@ const districtOptionRender = city => {
   )
 }
 
-const groupOptionRender = () => (
+const groupOptionRender = (placeHolder, groupData) => (
   <>
     <option value="default" disabled>
-      請選擇
+      {placeHolder}
     </option>
-    {groups.map(item => (
+    {groupData.map(item => (
       <option value={item.value} key={item.value}>
         {item.label}
       </option>

@@ -4,9 +4,17 @@ export default function Input(props) {
   const [initialVal, setInitialVal] = useState('')
   const [processVal, setProcessVal] = useState('')
   const [errMsg, setErrMsg] = useState('')
+  const {
+    createList = () => {},
+    name = '',
+    setReject = () => {},
+    type = '',
+    width = '',
+    placeholder = '',
+    maximun = 0
+  } = props
 
   useEffect(() => {
-    const { createList, name, setReject } = props
     !initialVal && setReject(true)
     createList(name, initialVal)
   }, [initialVal])
@@ -14,24 +22,17 @@ export default function Input(props) {
   const handleChange = e => {
     setProcessVal(e.target.value.trim())
   }
-
   const handleValidate = () => {
     let errMsg = ''
     let RegExp = ''
     let newVal = processVal
     let testResult = false
-    const { name } = props
     if (processVal) {
       switch (name) {
         case 'name':
           RegExp = /^[a-zA-z\u4e00-\u9fa5,.'-]{2,}$/i
           testResult = RegExp.test(processVal)
           if (testResult) {
-            const initialName = processVal.split('')
-            initialName.forEach((item, index, arr) => {
-              index % 2 === 0 ? (arr[index] = '*') : (arr[index] = item)
-            })
-            newVal = initialName.join('')
             setInitialVal(processVal)
           } else {
             errMsg = '請輸入正確姓名'
@@ -48,7 +49,7 @@ export default function Input(props) {
             accountArr.forEach((item, index, arr) => {
               index % 2 === 1 ? (arr[index] = '*') : (arr[index] = item)
             })
-            newVal = `${accountArr.join('')}${suffix}`
+            newVal = `${accountArr.join('')}@${suffix}`
             setInitialVal(processVal)
           } else {
             errMsg = '請輸入正確信箱'
@@ -56,14 +57,9 @@ export default function Input(props) {
           }
           break
         case 'phone':
-          RegExp = /^\d{10}$/
+          RegExp = /(\w{2,3}-?|\(\w{2,3}\))\w{3,4}-?\w{4}|09\w{2}(\w{6}|-\w{3}-\w{3})/
           testResult = RegExp.test(processVal)
           if (testResult) {
-            const initialPhone = processVal.split('')
-            initialPhone.forEach((item, index, arr) => {
-              index > 3 && index < 7 ? (arr[index] = '*') : (arr[index] = item)
-            })
-            newVal = initialPhone.join('')
             setInitialVal(processVal)
           } else {
             errMsg = '請輸入正確電話號碼'
@@ -94,11 +90,11 @@ export default function Input(props) {
   return (
     <>
       <input
-        type={props.type}
-        id={props.name}
-        className={props.width ? 'full' : null}
-        placeholder={props.placeholder}
-        maxLength={props.maximun || null}
+        type={type}
+        id={name}
+        className={width ? 'full' : null}
+        placeholder={placeholder}
+        maxLength={maximun || null}
         value={processVal}
         onChange={handleChange}
         onBlur={handleValidate}

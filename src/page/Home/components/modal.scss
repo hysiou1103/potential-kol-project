@@ -80,6 +80,7 @@
 }
 .modalBtn{
   font-size: 1.4rem;
+  cursor: pointer;
   &.submit{
     @include commonBtn($primary, white , 70px, 35px);
   }
