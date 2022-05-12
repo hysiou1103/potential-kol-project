@@ -61,7 +61,9 @@ export default function Form() {
     tempStorageList.birthday = birthday
     tempStorageList.fullAddress = fullAddress
     tempStorageList.id = id
-    localStorage.setItem('registInfor', JSON.stringify(tempStorageList))
+    const storageList = JSON.parse(JSON.stringify(localStorage.getItem('refistInfor'))) || []
+    storageList.push(tempStorageList)
+    localStorage.setItem('refistInfor', JSON.stringify(storageList))
     navigate(`/votingActive`)
   }
 
