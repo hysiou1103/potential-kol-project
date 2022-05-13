@@ -14,7 +14,7 @@ export default function UploadPhotoSection(props) {
             handleModal(placeHolder.value)
           }}
         >
-          <img src={uploadFile} alt="Upload File Icon" />
+          <img src={uploadFile} alt="Upload File Icon" width="22px" height="15px" />
           <span>選擇檔案</span>
         </button>
         <div className="fileInfor">

@@ -1,8 +1,7 @@
 import React from 'react'
-import Form from './components/Form'
+import { Outlet } from 'react-router-dom'
 import phoneLogo from 'imgs/phoneLogo.png'
 import banner from 'imgs/banner.png'
-import signUpForm from 'imgs/signUpForm.png'
 
 export default function Home() {
   return (
@@ -10,8 +9,7 @@ export default function Home() {
       <div className="container flex flex-col items-center relative">
         <img src={phoneLogo} alt="Phone Logo" className="strawberry" />
         <img src={banner} alt="2021 KOL TAIPEI FESTIVAL" />
-        <img src={signUpForm} alt="Sign Up Form" />
-        <Form />
+        <Outlet />
       </div>
     </section>
   )
