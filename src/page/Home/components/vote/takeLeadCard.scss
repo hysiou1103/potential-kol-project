@@ -1,0 +1,94 @@
+.leadCardWrap {
+  position: relative;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 3px rgba($color: $gray, $alpha: 0.2);
+  background-color: white;
+}
+
+.crownWrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 3px rgba($color: $gray, $alpha: 0.2);
+  background-color: white;
+
+  @include ipad {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.leadCardBody {
+  overflow: hidden;
+  font-size: 1.2rem;
+  color: $gray;
+
+  @include ipad {
+    font-size: 1.6rem
+  }
+
+  .votes {
+    text-align: right;
+
+    strong {
+      font-size: 1.6rem;
+      color: $primary;
+
+      @include ipad {
+        font-size: 2.4rem;
+      }
+    }
+  }
+}
+
+.leadCardImg {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+
+  @include ipad {
+    max-width: 280px;
+    max-height: 280px;
+  }
+
+  img {
+    min-height: 150px;
+
+    @include ipad {
+      min-height: 280px;
+    }
+  }
+}
+
+.eachGroup {
+  text-align: center;
+  line-height: 1.88;
+  color: white;
+  background-color: $primary;
+}
+
+.leadInfor {
+  padding: 5px 0;
+
+  & p:nth-child(1) {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.2);
+
+    @include ipad {
+      font-size: 1.6rem;
+    }
+  }
+
+  & p:nth-child(2) {
+    font-size: 1.4rem;
+
+    @include ipad {
+      font-size: 1.8rem;
+    }
+  }
+}

@@ -6,16 +6,7 @@ export const months = [...Array(12)].map((item, index) => index + 1)
 
 export const days = [...Array(31)].map((item, index) => index + 1)
 
-export const groups = [
-  {
-    value: 'dog',
-    label: '汪汪組'
-  },
-  {
-    value: 'cat',
-    label: '喵喵組'
-  }
-]
+export const groups = ['汪汪組', '喵喵組']
 
 export const cityList = [
   {
@@ -509,7 +500,6 @@ export const requiredItem = [
   'years',
   'months',
   'days',
-  'city',
   'district',
   'detailAddress',
   'photo1'

@@ -1,26 +1,31 @@
 import React, { useState } from 'react'
 import { groups, years, months, days, cityList } from 'config'
 
-export default function Selector(props) {
+export default function Selector({
+  name = '',
+  city = '',
+  width = '',
+  createSignUpData = () => {}
+}) {
   const [selectedVal, setSelectedVal] = useState('default')
-  const { createList = () => {}, name = '', city = '', width = '' } = props
   const handleChange = e => {
     setSelectedVal(e.target.value)
-    createList(name, e.target.value)
+    createSignUpData(name, e.target.value)
   }
 
+  const cityArr = cityList.map(item => item.Name)
   const createOption = () => {
     switch (name) {
       case 'years':
-        return dateOptionRender('西元年', years)
+        return commonOptionRender('西元年', years)
       case 'months':
-        return dateOptionRender('月', months)
+        return commonOptionRender('月', months)
       case 'days':
-        return dateOptionRender('日', days)
+        return commonOptionRender('日', days)
       case 'groups':
-        return groupOptionRender('請選擇', groups)
+        return commonOptionRender('請選擇', groups)
       case 'city':
-        return cityOptionRender('請選擇縣市', cityArr)
+        return commonOptionRender('請選擇縣市', cityArr)
       case 'district':
         return districtOptionRender('請選擇鄉鎮', city)
       default:
@@ -40,8 +45,6 @@ export default function Selector(props) {
   )
 }
 
-const cityArr = cityList.map(item => item.Name)
-
 const updateClassName = width => {
   if (width === '1/3') {
     return 'oneThird'
@@ -52,20 +55,18 @@ const updateClassName = width => {
   }
 }
 
-const cityOptionRender = (placeHolder, cityData) => {
-  return (
-    <>
-      <option value="default" disabled>
-        {placeHolder}
+const commonOptionRender = (placeHolder, renderData) => (
+  <>
+    <option value="default" disabled>
+      {placeHolder}
+    </option>
+    {renderData.map(item => (
+      <option value={item} key={item}>
+        {item}
       </option>
-      {cityData.map((item, index) => (
-        <option value={item} key={index}>
-          {item}
-        </option>
-      ))}
-    </>
-  )
-}
+    ))}
+  </>
+)
 
 const districtOptionRender = (placeHolder, city) => {
   const cityIndex = cityList.findIndex(item => item.Name === city)
@@ -83,29 +84,3 @@ const districtOptionRender = (placeHolder, city) => {
     </>
   )
 }
-
-const groupOptionRender = (placeHolder, groupData) => (
-  <>
-    <option value="default" disabled>
-      {placeHolder}
-    </option>
-    {groupData.map(item => (
-      <option value={item.value} key={item.value}>
-        {item.label}
-      </option>
-    ))}
-  </>
-)
-
-const dateOptionRender = (placeHolder, dateData) => (
-  <>
-    <option value="default" disabled>
-      {placeHolder}
-    </option>
-    {dateData.map(item => (
-      <option value={item} key={item}>
-        {item}
-      </option>
-    ))}
-  </>
-)

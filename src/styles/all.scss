@@ -3,11 +3,13 @@
 @import './helpers/utilities';
 
 
-@import 'page/Home/components/form';
-@import 'page/Home/components/input';
-@import 'page/Home/components/selector';
-@import 'page/Home/components/uploadPhotoSection';
-@import 'page/Home/components/modal';
+@import 'page/Home/components/form/form';
+@import 'page/Home/components/vote/votingActive';
+@import 'page/Home/components/form/input';
+@import 'page/Home/components/form/selector';
+@import 'page/Home/components/form/uploadPhotoSection';
+@import 'page/Home/components/form/modal';
+@import 'page/Home/components/vote/takeLeadCard.scss';
 @import 'components/navigation/navbar';
 @import 'components/navigation/phoneNav';
 @import 'page/Home/home';

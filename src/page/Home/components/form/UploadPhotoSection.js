@@ -1,9 +1,11 @@
 import React from 'react'
 import uploadFile from 'imgs/uploadFile.png'
 
-export default function UploadPhotoSection(props) {
-  const { fileName = '', placeHolder = {}, handleModal = () => {} } = props
-
+export default function UploadPhotoSection({
+  fileName = '',
+  placeHolder = {},
+  handleModal = () => {}
+}) {
   return (
     <>
       <label>上傳{placeHolder.label}</label>
@@ -14,7 +16,7 @@ export default function UploadPhotoSection(props) {
             handleModal(placeHolder.value)
           }}
         >
-          <img src={uploadFile} alt="Upload File Icon" width="22px" height="15px" />
+          <img src={uploadFile} alt="Upload File Icon" width="22" height="15" />
           <span>選擇檔案</span>
         </button>
         <div className="fileInfor">

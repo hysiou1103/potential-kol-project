@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react'
 
-export default function Input(props) {
-  const [initialVal, setInitialVal] = useState('')
+export default function Input({
+  name = '',
+  type = '',
+  width = '',
+  placeholder = '',
+  maximun = 0,
+  setReject = () => {},
+  createSignUpData = () => {}
+}) {
   const [processVal, setProcessVal] = useState('')
-  const [errMsg, setErrMsg] = useState('')
-  const {
-    createList = () => {},
-    name = '',
-    setReject = () => {},
-    type = '',
-    width = '',
-    placeholder = '',
-    maximun = 0
-  } = props
-
-  useEffect(() => {
-    !initialVal && setReject(true)
-    createList(name, initialVal)
-  }, [initialVal])
-
   const handleChange = e => {
     setProcessVal(e.target.value.trim())
   }
+
+  const [errMsg, setErrMsg] = useState('')
+  const [initialVal, setInitialVal] = useState('')
   const handleValidate = () => {
     let errMsg = ''
     let RegExp = ''
@@ -82,10 +76,16 @@ export default function Input(props) {
       }
     } else {
       errMsg = '此欄位為必填項目'
+      setInitialVal('')
     }
     setProcessVal(newVal)
     setErrMsg(errMsg)
   }
+
+  useEffect(() => {
+    !initialVal && setReject(true)
+    createSignUpData(name, initialVal)
+  }, [initialVal])
 
   return (
     <>

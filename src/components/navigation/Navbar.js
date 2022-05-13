@@ -9,7 +9,7 @@ export default function Navbar() {
     <header>
       <div className="container navWrap">
         <Link to="/" title="ETmall" className="logo">
-          <img src={Logo} alt="ETmall" width="115px" height="40px" />
+          <img src={Logo} alt="ETmall" width="115" height="40" />
         </Link>
         <div className="linkWrap">
           <nav>
@@ -28,10 +28,10 @@ export default function Navbar() {
           </nav>
           <div className="flex">
             <a href="#">
-              <img src={fbIcon} alt="Facebook Sharing Icon" width="30px" height="30px" />
+              <img src={fbIcon} alt="Facebook Sharing Icon" width="30" height="30" />
             </a>
             <a href="#">
-              <img src={lineIcon} alt="Line Sharing Icon" width="30px" height="30px" />
+              <img src={lineIcon} alt="Line Sharing Icon" width="30" height="30" />
             </a>
           </div>
         </div>

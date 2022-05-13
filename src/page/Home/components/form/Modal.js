@@ -4,52 +4,60 @@ export default function Modal(props) {
   const {
     openModal = false,
     photoIndex = '',
-    signUpList = {},
+    signUpData = {},
     handleModal = () => {},
-    createList = () => {}
+    createSignUpData = () => {}
   } = props
-  const [photoName, setPhotoName] = useState('上傳檔案')
-  const [imgSrc, setImgSrc] = useState('')
-  const modalShow = useRef()
-  const imgUpload = useRef()
 
+  const modalShow = useRef()
   useEffect(() => {
     openModal ? modalShow.current.classList.add('show') : modalShow.current.classList.remove('show')
   }, [openModal])
 
   useEffect(() => {
-    const nameKey = `${photoIndex}FileName`
-    const srcKey = photoIndex
-    signUpList[`${photoIndex}FileName`] && setPhotoName(signUpList[nameKey])
-    signUpList[srcKey] && setImgSrc(signUpList[srcKey])
-  }, [signUpList])
+    signUpData[photoIndex] &&
+      signUpData[photoIndex].src &&
+      setPhotoObj({
+        src: signUpData[photoIndex].src,
+        fileName: signUpData[photoIndex].fileName
+      })
+  }, [signUpData])
 
+  const [photoObj, setPhotoObj] = useState({
+    src: '',
+    fileName: '上傳檔案'
+  })
+  const imgUpload = useRef()
   const handleChange = () => {
     if (imgUpload.current.files && imgUpload.current.files[0]) {
       const reader = new FileReader()
       reader.onload = () => {
         const arrayBuffer = reader.result
-        setImgSrc(arrayBuffer)
+        setPhotoObj({
+          src: arrayBuffer,
+          fileName: imgUpload.current.files[0].name
+        })
       }
       reader.readAsDataURL(imgUpload.current.files[0])
-      setPhotoName(imgUpload.current.files[0].name)
-      createList(`${photoIndex}FileName`, imgUpload.current.files[0].name)
     }
   }
   const modalController = status => {
     handleModal(!openModal)
     if (status === 'cancel') {
-      setPhotoName('')
-      setImgSrc('')
+      setPhotoObj({
+        src: '',
+        fileName: ''
+      })
       return
     }
-    createList(photoIndex, imgSrc)
+    createSignUpData(photoIndex, photoObj)
   }
+
   return (
     <div className="modalBg" ref={modalShow}>
       <div className="modalWrap">
         <div className="modalHeader">
-          <p>{photoName}</p>
+          <p>{photoObj.fileName}</p>
           <span
             className="closeIcon"
             onClick={() => {
@@ -62,7 +70,9 @@ export default function Modal(props) {
             <label htmlFor="photo">上傳圖片</label>
             <input type="file" id="photo" ref={imgUpload} onChange={handleChange} />
           </div>
-          <div className="fileGroup">{imgSrc && <img src={imgSrc} alt="signUpPhoto" />}</div>
+          <div className="fileGroup">
+            {photoObj.src && <img src={photoObj.src} alt="signUpPhoto" />}
+          </div>
         </div>
         <div className="modalFooter">
           <button

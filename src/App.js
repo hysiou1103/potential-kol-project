@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Home from './page/Home/Home'
-import Form from './page/Home/components/Form'
-import Vote from './page/Home/components/VotingActive'
+import Form from './page/Home/components/form/Form'
+import Vote from './page/Home/components/vote/VotingActive'
 import Navbar from './components/navigation/Navbar'
 import PhoneNav from './components/navigation/PhoneNav'
 
