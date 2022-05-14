@@ -7,12 +7,13 @@ export default function VotingActive() {
     <>
       <img src={competitiveSituation} alt="Competitive Situation" />
       <section className="takeLeadSection">
-        {votingList.map((competitor, index) => (
-          <TakeLeadCard key={competitor.id} competitor={competitor} order={index} />
-        ))}
+        {votingList.length &&
+          votingList.map((competitor, index) => (
+            <TakeLeadCard key={competitor.id} competitor={competitor} order={index} />
+          ))}
       </section>
     </>
   )
 }
 
-const votingList = JSON.parse(localStorage.getItem('registInfor'))
+const votingList = JSON.parse(localStorage.getItem('registInfor')) || []
