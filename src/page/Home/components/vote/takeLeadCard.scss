@@ -4,6 +4,11 @@
   border-radius: 10px;
   box-shadow: 2px 2px 3px rgba($color: $gray, $alpha: 0.2);
   background-color: white;
+  max-width: 160px;
+
+  @include ipad {
+    max-width: 310px;
+  }
 }
 
 .crownWrap {
@@ -36,7 +41,14 @@
 
     strong {
       font-size: 1.6rem;
-      color: $primary;
+
+      &.dogs {
+        color: $dogsGroup;
+      }
+
+      &.cats {
+        color: $catsGroup;
+      }
 
       @include ipad {
         font-size: 2.4rem;
@@ -46,30 +58,31 @@
 }
 
 .leadCardImg {
-  max-width: 150px;
-  max-height: 150px;
+  width: 150px;
+  height: 150px;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
 
   @include ipad {
-    max-width: 280px;
-    max-height: 280px;
+    width: 280px;
+    height: 280px;
   }
 
-  img {
-    min-height: 150px;
 
-    @include ipad {
-      min-height: 280px;
-    }
-  }
 }
 
 .eachGroup {
   text-align: center;
   line-height: 1.88;
   color: white;
-  background-color: $primary;
+
+  &.dogs {
+    background-color: $dogsGroup;
+  }
+
+  &.cats {
+    background-color: $catsGroup;
+  }
 }
 
 .leadInfor {
@@ -85,6 +98,10 @@
   }
 
   & p:nth-child(2) {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-size: 1.4rem;
 
     @include ipad {

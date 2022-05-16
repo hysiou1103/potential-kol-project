@@ -39,6 +39,7 @@ export default function Form() {
       fileName: ''
     }
   })
+  const [reject, setReject] = useState(true)
   const createSignUpData = (dataKey, dataValue) => {
     const tempData = { ...signUpData }
     dataValue ? (tempData[dataKey] = dataValue) : delete tempData[dataValue]
@@ -60,7 +61,6 @@ export default function Form() {
     complete ? setReject(false) : setReject(true)
   }, [signUpData, privacy, portrait])
 
-  const [reject, setReject] = useState(true)
   const rejectBtn = useRef()
   useEffect(() => {
     reject
@@ -83,6 +83,7 @@ export default function Form() {
     const id = Math.floor(new Date(), 1000)
     tempStorageData.birthday = birthday
     tempStorageData.id = id
+    tempStorageData.votes = 0
     const storageList = JSON.parse(localStorage.getItem('registInfor')) || []
     storageList.push(tempStorageData)
     localStorage.setItem('registInfor', JSON.stringify(storageList))

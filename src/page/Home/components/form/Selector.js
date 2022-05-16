@@ -13,8 +13,9 @@ export default function Selector({
     createSignUpData(name, e.target.value)
   }
 
-  const cityArr = cityList.map(item => item.Name)
   const createOption = () => {
+    const cityArr = cityList.map(item => item.Name)
+
     switch (name) {
       case 'years':
         return commonOptionRender('西元年', years)
@@ -46,13 +47,13 @@ export default function Selector({
 }
 
 const updateClassName = width => {
+  let result = ''
   if (width === '1/3') {
-    return 'oneThird'
+    result = 'oneThird'
   } else if (width === '1/2') {
-    return 'oneHalf'
-  } else {
-    return null
+    result = 'oneHalf'
   }
+  return result
 }
 
 const commonOptionRender = (placeHolder, renderData) => (

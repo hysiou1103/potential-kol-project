@@ -1,0 +1,186 @@
+.votingCard {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: white;
+  width: 100%;
+
+  @include ipad {
+    flex-wrap: nowrap;
+    padding: 15px 30px;
+  }
+}
+
+.orderWrap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 5px 5px 10px;
+  border-radius: 0 0 0 15px;
+  text-align: center;
+  color: white;
+  background-color: rgba(50, 50, 50, $alpha: 0.6);
+
+  @include ipad {
+    width: 71px;
+    font-size: 1.6rem;
+  }
+}
+
+.votingCardImg {
+  width: 132px;
+  height: 132px;
+  overflow: hidden;
+
+  @include ipad {
+    width: 150px;
+    height: 150px;
+  }
+
+}
+
+.votingIntro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-left: 15px;
+}
+
+.votingCardInfor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+
+  @include ipad {
+    width: 247px;
+  }
+}
+
+.groupTag {
+  width: 56px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+
+  @include ipad {
+    width: 68px;
+    height: 31px;
+    line-height: 31px;
+    font-size: 1.6rem;
+  }
+
+  &.dogs {
+    background-color: $dogsGroup;
+
+  }
+
+  &.cats {
+    background-color: $catsGroup;
+
+  }
+
+}
+
+.competitorId {
+  width: 173px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 1.8rem;
+
+  @include ipad {
+    width: 247px;
+    height: 64px;
+    font-size: 2.4rem;
+    white-space: normal;
+  }
+}
+
+.votingRelative {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+
+  @include ipad {
+    justify-content: flex-end;
+    width: calc(100% - 247px)
+  }
+
+  .votes {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    width: 100%;
+
+    strong {
+      margin-left: 5px;
+      font-size: 2.8rem;
+      font-weight: bold;
+    }
+
+    @include ipad {
+      width: 60%;
+      justify-content: flex-end;
+
+
+      strong {
+        font-size: 5.6rem;
+      }
+    }
+
+
+
+  }
+
+  .votingBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 5px 20px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    color: white;
+
+    @include ipad {
+      width: 35%;
+
+      font-size: 2.4rem;
+    }
+  }
+
+  &.dogs {
+    strong {
+      color: $dogsGroup
+    }
+
+    .votingBtn {
+      background-color: $dogsGroup;
+
+    }
+  }
+
+  &.cats {
+    strong {
+      color: $catsGroup
+    }
+
+    .votingBtn {
+      background-color: $catsGroup;
+
+    }
+  }
+
+
+}
