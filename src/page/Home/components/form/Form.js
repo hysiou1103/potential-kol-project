@@ -39,7 +39,6 @@ export default function Form() {
       fileName: ''
     }
   })
-  const [reject, setReject] = useState(true)
   const createSignUpData = (dataKey, dataValue) => {
     const tempData = { ...signUpData }
     dataValue ? (tempData[dataKey] = dataValue) : delete tempData[dataValue]
@@ -62,6 +61,7 @@ export default function Form() {
   }, [signUpData, privacy, portrait])
 
   const rejectBtn = useRef()
+  const [reject, setReject] = useState(true)
   useEffect(() => {
     reject
       ? rejectBtn.current.classList.add('disabled')

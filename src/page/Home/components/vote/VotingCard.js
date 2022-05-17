@@ -30,7 +30,7 @@ export default function VotingCard({ competitor = {}, index = 0 }) {
         </div>
         <div className="votingRelative" ref={votesColor}>
           <div className="votes">
-            票數 <strong>90,000</strong>
+            票數 <strong>{competitor.votes}</strong>
           </div>
           <button className="votingBtn">前往投票</button>
         </div>

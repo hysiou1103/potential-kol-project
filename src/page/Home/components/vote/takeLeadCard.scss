@@ -3,11 +3,16 @@
   padding: 15px;
   border-radius: 10px;
   box-shadow: 2px 2px 3px rgba($color: $gray, $alpha: 0.2);
-  background-color: white;
   max-width: 160px;
+  transition: transform 0.5s ease;
+  background-color: white;
 
   @include ipad {
     max-width: 310px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
   }
 }
 
@@ -36,19 +41,31 @@
     font-size: 1.6rem
   }
 
+  &.dogs {
+    strong {
+      color: $dogsGroup;
+    }
+
+    .eachGroup {
+      background-color: $dogsGroup;
+    }
+  }
+
+  &.cats {
+    strong {
+      color: $catsGroup;
+    }
+
+    .eachGroup {
+      background-color: $catsGroup;
+    }
+  }
+
   .votes {
     text-align: right;
 
     strong {
       font-size: 1.6rem;
-
-      &.dogs {
-        color: $dogsGroup;
-      }
-
-      &.cats {
-        color: $catsGroup;
-      }
 
       @include ipad {
         font-size: 2.4rem;
@@ -75,14 +92,6 @@
   text-align: center;
   line-height: 1.88;
   color: white;
-
-  &.dogs {
-    background-color: $dogsGroup;
-  }
-
-  &.cats {
-    background-color: $catsGroup;
-  }
 }
 
 .leadInfor {
