@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { FormContext } from './Form'
 import { groups, years, months, days, cityList } from 'config'
 
-export default function Selector({
-  name = '',
-  city = '',
-  width = '',
-  createSignUpData = () => {}
-}) {
+export default function Selector({ name = '', width = '' }) {
+  const { state, dispatch } = useContext(FormContext)
+  const { signUpData } = state
   const [selectedVal, setSelectedVal] = useState('default')
   const handleChange = e => {
     setSelectedVal(e.target.value)
-    createSignUpData(name, e.target.value)
+    dispatch({
+      type: 'CREATE_SIGNUPDATA',
+      payload: {
+        dataKey: name,
+        dataValue: e.target.value
+      }
+    })
   }
 
   const createOption = () => {
@@ -28,7 +32,7 @@ export default function Selector({
       case 'city':
         return commonOptionRender('請選擇縣市', cityArr)
       case 'district':
-        return districtOptionRender('請選擇鄉鎮', city)
+        return districtOptionRender('請選擇鄉鎮', signUpData.city)
       default:
         break
     }

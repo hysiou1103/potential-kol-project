@@ -1,13 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { FormContext } from './Form'
 
-export default function Modal(props) {
-  const {
-    openModal = false,
-    photoIndex = '',
-    signUpData = {},
-    handleModal = () => {},
-    createSignUpData = () => {}
-  } = props
+export default function Modal() {
+  const { state, dispatch } = useContext(FormContext)
+  const { openModal, signUpData, photoIndex } = state
 
   const modalShow = useRef()
   useEffect(() => {
@@ -42,15 +38,22 @@ export default function Modal(props) {
     }
   }
   const modalController = status => {
-    handleModal(!openModal)
+    dispatch({ type: 'CHANGE_MODAL_MODE' })
     if (status === 'cancel') {
       setPhotoObj({
         src: '',
         fileName: ''
       })
+      imgUpload.current.value = ''
       return
     }
-    createSignUpData(photoIndex, photoObj)
+    dispatch({
+      type: 'CREATE_SIGNUPDATA',
+      payload: {
+        dataKey: photoIndex,
+        dataValue: photoObj
+      }
+    })
   }
 
   return (
