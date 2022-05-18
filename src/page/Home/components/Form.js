@@ -26,6 +26,8 @@ export default function Form() {
     city: '',
     district: '',
     detailAddress: '',
+    birthday: '',
+    votes: 0,
     photo1: {
       src: '',
       fileName: ''
@@ -83,7 +85,6 @@ export default function Form() {
     const id = Math.floor(new Date(), 1000)
     tempStorageData.birthday = birthday
     tempStorageData.id = id
-    tempStorageData.votes = 0
     const storageList = JSON.parse(localStorage.getItem('registInfor')) || []
     storageList.push(tempStorageData)
     localStorage.setItem('registInfor', JSON.stringify(storageList))

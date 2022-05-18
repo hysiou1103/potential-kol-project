@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import VotingCard from './VotingCard'
 import { groups } from 'config'
 import votingSection from 'imgs/votingSection.png'
 import search from 'imgs/search.png'
 
 export default function VotingSection({ votingList = [] }) {
-  const inputRef = useRef()
+  const [searchKeyword, setSearchKeyword] = useState('')
+  const handleChange = e => {
+    setSearchKeyword(e.target.value)
+  }
+
   const handleSearchClick = () => {
-    if (inputRef.current) {
-      let newKeyword = inputRef.current.value
-      newKeyword
-        ? composeRenderList(newKeyword, 'competitionID')
-        : composeRenderList('ALL', 'groups')
-    }
+    searchKeyword
+      ? composeRenderList(searchKeyword, 'competitionID')
+      : composeRenderList('ALL', 'groups')
   }
 
   const [chosenGroup, setChosenGroup] = useState('ALL')
@@ -20,8 +21,8 @@ export default function VotingSection({ votingList = [] }) {
     if (e.target.nodeName !== 'LI') return
     let newGroup = e.target.innerText
     setChosenGroup(newGroup)
+    setSearchKeyword('')
     composeRenderList(newGroup, 'groups')
-    inputRef.current.value = ''
   }
 
   const [renderList, setRenderList] = useState([...votingList])
@@ -41,9 +42,10 @@ export default function VotingSection({ votingList = [] }) {
           <div className="searchInputGroup">
             <input
               type="text"
-              ref={inputRef}
               className="searchInput"
               placeholder="請輸入參賽名稱或編號"
+              value={searchKeyword}
+              onChange={handleChange}
             />
             <button className="searchBtn" onClick={handleSearchClick}>
               <img src={search} alt="Search Keyword" width="20" height="20" />

@@ -34,7 +34,7 @@ const reorderListWithHigherVotes = votingList.sort((a, b) => {
 })
 
 const searchTeamLeader = (filterList, filterText) => {
-  let leader = {}
+  let leader = []
   leader = filterList.filter(item => item.groups === filterText).slice(0, 1)
   return leader
 }
