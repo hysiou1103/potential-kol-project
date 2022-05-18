@@ -1,6 +1,6 @@
 import React from 'react'
-import TakeLeadCard from './TakeLeadCard'
-import VotingSection from './VotingSection'
+import TakeLeadCard from './components/TakeLeadCard'
+import VotingSection from './components/VotingSection'
 import competitiveSituation from 'imgs/competitiveSituation.png'
 
 export default function VotingActive() {
