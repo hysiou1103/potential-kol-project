@@ -1,5 +1,6 @@
-.modalBg{
+.modalBg {
   position: fixed;
+  z-index: 1;
   top: 0;
   bottom: 0;
   left: 0;
@@ -8,54 +9,65 @@
   align-items: center;
   justify-content: center;
   background-color: rgba($color: $gray-800, $alpha: 0.1);
-  &.show{
+
+  &.show {
     display: flex;
   }
 }
-.modalWrap{
+
+.modalWrap {
   width: 100%;
-  max-width: 340px ;
+  max-width: 340px;
   border-radius: 15px;
   overflow: hidden;
   background-color: white;
 }
-.modalHeader{
+
+.modalHeader {
   display: flex;
   justify-content: space-between;
   padding: 10px;
   color: white;
   background-color: $primary;
 }
-.closeIcon{
+
+.closeIcon {
   display: block;
-  position: relative;
   cursor: pointer;
   padding: 10px;
-  &::before,&::after{
+
+  &::before,
+  &::after {
     content: '';
     position: absolute;
+    z-index: 1;
     top: 50%;
     right: 0;
     width: 15px;
     height: 2px;
     background-color: white;
   }
-  &::before{
+
+  &::before {
     transform: rotate(135deg);
   }
-  &::after{
+
+  &::after {
     transform: rotate(45deg);
   }
 }
-.modalBody{
+
+.modalBody {
   padding: 10px;
   max-height: 250px;
   overflow-y: scroll;
 }
-.photoGroup{
+
+.photoGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   input {
     width: 70%;
     padding: 5px;
@@ -67,24 +79,29 @@
   }
 
 }
-.fileGroup{
+
+.fileGroup {
   width: 100%;
-  padding-top:10px ;
+  padding-top: 10px;
 }
-.modalFooter{
+
+.modalFooter {
   display: flex;
   gap: 10px;
   padding: 10px;
   border-top: 1px solid rgba($color: $gray-800, $alpha: 0.1);
   justify-content: center;
 }
-.modalBtn{
+
+.modalBtn {
   font-size: 1.4rem;
   cursor: pointer;
-  &.submit{
-    @include commonBtn($primary, white , 70px, 35px);
+
+  &.submit {
+    @include commonBtn($primary, white, 70px, 35px);
   }
-  &.cancel{
-    @include commonBtn($gray, white , 70px, 35px);
+
+  &.cancel {
+    @include commonBtn($gray, white, 70px, 35px);
   }
 }

@@ -14,7 +14,7 @@ export default function TakeLeadCard({ competitor, order }) {
   }, [competitor.groups])
 
   return (
-    <div className="leadCardWrap">
+    <div className="leadCardWrap relative">
       <div className="crownWrap">
         <img src={crownIcon} alt="Crown Icon" />
       </div>

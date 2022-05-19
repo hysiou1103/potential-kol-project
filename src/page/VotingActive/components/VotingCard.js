@@ -14,7 +14,7 @@ export default function VotingCard({ competitor = {}, index = 0 }) {
     votesColor.current.classList.add(`${groupName}`)
   }, [competitor.groups])
   return (
-    <div className="votingCard">
+    <div className="votingCard relative">
       <div className="orderWrap">
         <p>NO.{index + 1}</p>
       </div>
