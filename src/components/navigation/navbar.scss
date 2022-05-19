@@ -12,21 +12,8 @@ header {
   }
 }
 
-.navWrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .linkWrap {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   font-size: 1.6rem;
-
-  ul {
-    display: flex;
-  }
 
   nav a {
     padding: 16px 10px 20px;

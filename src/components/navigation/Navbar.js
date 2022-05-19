@@ -7,13 +7,13 @@ import lineIcon from 'imgs/line-icon.png'
 export default function Navbar() {
   return (
     <header>
-      <div className="container navWrap">
+      <div className="container flex justify-between items-center ">
         <Link to="/" title="ETmall" className="logo">
           <img src={Logo} alt="ETmall" width="115" height="40" />
         </Link>
-        <div className="linkWrap">
+        <div className="linkWrap flex justify-end items-center">
           <nav>
-            <ul>
+            <ul className="flex">
               <li>
                 <Link to="/" title="我要報名">
                   我要報名

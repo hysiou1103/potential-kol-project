@@ -62,7 +62,7 @@ export default function Modal() {
         <div className="modalHeader">
           <p>{photoObj.fileName}</p>
           <span
-            className="closeIcon relative"
+            className="closeIcon relative z-0"
             onClick={() => {
               modalController('cancel')
             }}

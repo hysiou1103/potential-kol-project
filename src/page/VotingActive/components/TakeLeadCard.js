@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import crownIcon from 'imgs/crownIcon.png'
 
-export default function TakeLeadCard({ competitor, order }) {
+export default function TakeLeadCard({ competitor = {} }) {
   const groupTag = useRef()
   useEffect(() => {
     let groupName = ''
@@ -14,8 +14,8 @@ export default function TakeLeadCard({ competitor, order }) {
   }, [competitor.groups])
 
   return (
-    <div className="leadCardWrap relative">
-      <div className="crownWrap">
+    <div className="leadCardWrap relative z-0">
+      <div className="crownWrap absolute z-1">
         <img src={crownIcon} alt="Crown Icon" />
       </div>
       <div className="leadCardBody" ref={groupTag}>
@@ -24,7 +24,7 @@ export default function TakeLeadCard({ competitor, order }) {
         </div>
         <p className="eachGroup">{competitor.groups}</p>
         <div className="leadInfor">
-          <p>{`NO.${order + 1}`}</p>
+          <p>{`NO.${competitor.id}`}</p>
           <p>{competitor.competitionID}</p>
         </div>
         <div className="votes">

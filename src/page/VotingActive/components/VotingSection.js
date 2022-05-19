@@ -38,8 +38,8 @@ export default function VotingSection({ votingList = [] }) {
     <>
       <img src={votingSection} alt="voting section" />
       <section className="votingSectionWrap">
-        <div className="searchingBar">
-          <div className="searchInputGroup">
+        <div className="searchingBar flex justify-between">
+          <div className="searchInputGroup flex">
             <input
               type="text"
               className="searchInput"
@@ -47,12 +47,15 @@ export default function VotingSection({ votingList = [] }) {
               value={searchKeyword}
               onChange={handleChange}
             />
-            <button className="searchBtn" onClick={handleSearchClick}>
+            <button
+              className="searchBtn flex justify-around items-center"
+              onClick={handleSearchClick}
+            >
               <img src={search} alt="Search Keyword" width="20" height="20" />
               <span>搜尋</span>
             </button>
           </div>
-          <ul className="groupBtnWrap" onClick={handleGroupsClick}>
+          <ul className="groupBtnWrap flex items-center" onClick={handleGroupsClick}>
             {['ALL', ...groups].map(item => (
               <li
                 key={item}
@@ -64,7 +67,7 @@ export default function VotingSection({ votingList = [] }) {
             ))}
           </ul>
         </div>
-        <div className="votingCardWrap">
+        <div className="votingCardWrap flex flex-col">
           {renderList.length
             ? renderList.map((item, index) => (
                 <VotingCard competitor={item} key={item.id} index={index} />

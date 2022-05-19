@@ -6,7 +6,7 @@ import vote from 'imgs/vote.png'
 export default function PhoneNav() {
   return (
     <nav className="phoneNav">
-      <ul>
+      <ul className="flex justify-around items-center">
         <li>
           <Link to="/" title="我要報名">
             <img src={signUp} alt="Sign Up Link" width="24" height="24" />

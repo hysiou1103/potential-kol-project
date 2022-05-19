@@ -1,10 +1,7 @@
 .votingCard {
-  display: flex;
-  align-items: center;
   padding: 20px 10px;
   border-radius: 10px;
   background-color: white;
-  width: 100%;
 
   @include ipad {
     flex-wrap: nowrap;
@@ -13,8 +10,6 @@
 }
 
 .orderWrap {
-  position: absolute;
-  z-index: 1;
   right: 0;
   top: 0;
   padding: 5px 5px 5px 10px;
@@ -42,17 +37,11 @@
 }
 
 .votingIntro {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap;
-  width: 100%;
   margin-left: 15px;
 }
 
 .votingCardInfor {
-  display: flex;
-  flex-direction: column;
   gap: 10px;
   width: 100%;
 
@@ -105,8 +94,6 @@
 }
 
 .votingRelative {
-  display: flex;
-  align-items: center;
   flex-wrap: wrap;
   gap: 10px;
   width: 100%;
@@ -117,8 +104,6 @@
   }
 
   .votes {
-    display: flex;
-    align-items: center;
     font-size: 1.8rem;
     width: 100%;
 
@@ -143,9 +128,6 @@
   }
 
   .votingBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     padding: 5px 20px;
     cursor: pointer;

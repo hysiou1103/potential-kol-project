@@ -7,7 +7,7 @@ import PhoneNav from './components/navigation/PhoneNav'
 
 function App() {
   return (
-    <div className="App relative">
+    <div className="App relative z-0">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}>

@@ -34,7 +34,34 @@ a {
   justify-content: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
 .relative {
   position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.z-0 {
   z-index: 0
+}
+
+.z-1 {
+  z-index: 1
+}
+
+.w-full {
+  width: 100%;
 }

@@ -8,14 +8,14 @@ export default function VotingActive() {
     <>
       {reorderListWithHigherVotes.length ? (
         <>
-          <div className="totalVotes">
+          <div className="totalVotes flex justify-center items-center w-full">
             目前總投票數：<strong>{totalVotes}</strong>票
           </div>
           <img src={competitiveSituation} alt="Competitive Situation" />
-          <section className="takeLeadSection">
+          <section className="takeLeadSection flex justify-center">
             {takeLeadGroup.length
-              ? takeLeadGroup.map((competitor, index) => (
-                  <TakeLeadCard key={competitor.id} competitor={competitor} order={index} />
+              ? takeLeadGroup.map(competitor => (
+                  <TakeLeadCard key={competitor.id} competitor={competitor} />
                 ))
               : null}
           </section>

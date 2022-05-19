@@ -8,15 +8,12 @@
 }
 
 .searchingBar {
-  display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 15px;
   padding: 25px 0;
 }
 
 .searchInputGroup {
-  display: flex;
   width: 330px;
   box-shadow: 2px 2px 3px rgba($color: $gray, $alpha: 0.2);
 
@@ -35,9 +32,6 @@
 }
 
 .searchBtn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   cursor: pointer;
   width: 30%;
   padding: 5px 15px;
@@ -53,8 +47,6 @@
 }
 
 .groupBtnWrap {
-  display: flex;
-  align-items: center;
   gap: 5px;
   margin-left: auto;
 }
@@ -78,8 +70,5 @@
 }
 
 .votingCardWrap {
-  display: flex;
-  flex-direction: column;
   gap: 15px;
-
 }
