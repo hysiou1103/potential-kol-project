@@ -11,12 +11,7 @@ export default function Form() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { privacy, portrait, reject, signUpData, photoIndex } = state
 
-  const handleChange = e =>
-    e.target.value === 'privacy'
-      ? dispatch({ type: 'CHANGE_PRIVACY' })
-      : dispatch({ type: 'CHANGE_PORTRAIT' })
   useEffect(() => {
-    if (!privacy || !portrait) return
     dispatch({ type: 'CHANGE_REJECT' })
   }, [signUpData, privacy, portrait])
 
@@ -32,10 +27,9 @@ export default function Form() {
     if (reject) return
     const { years, months, days, city, ...tempStorageData } = signUpData
     const birthday = `${years}/${months}/${days}`
-    const id = Math.floor(new Date(), 1000)
-    tempStorageData.birthday = birthday
-    tempStorageData.id = id
     const storageList = JSON.parse(localStorage.getItem('registInfor')) || []
+    tempStorageData.birthday = birthday
+    tempStorageData.id = storageList.length + 1
     storageList.push(tempStorageData)
     localStorage.setItem('registInfor', JSON.stringify(storageList))
     navigate(`/votingActive`)
@@ -128,7 +122,9 @@ export default function Form() {
               id="privacyPolicy"
               value="privacy"
               checked={privacy}
-              onChange={handleChange}
+              onChange={() => {
+                dispatch({ type: 'CHANGE_PRIVACY' })
+              }}
             />
             <label htmlFor="privacyPolicy">
               我同意東森購物條款 <span className="popUP">隱私權保護政策</span> 及
@@ -141,7 +137,9 @@ export default function Form() {
               id="portraitRights"
               value="portrait"
               checked={portrait}
-              onChange={handleChange}
+              onChange={() => {
+                dispatch({ type: 'CHANGE_PORTRAIT' })
+              }}
             />
             <label htmlFor="portraitRights">
               我擁有投稿照片之所有權或業經合法授權，且絕無侵害他人之著作權、肖像權及違反任何法律規定；
@@ -159,18 +157,20 @@ export default function Form() {
 }
 
 const reducer = (state, action) => {
+  const { privacy, portrait, signUpData, openModal } = state
   switch (action.type) {
     case 'CHANGE_PRIVACY':
-      return { ...state, privacy: !state.privacy }
+      return { ...state, privacy: !privacy }
     case 'CHANGE_PORTRAIT':
-      return { ...state, portrait: !state.portrait }
+      return { ...state, portrait: !portrait }
     case 'CHANGE_REJECT':
       let complete = false
+      let status = true
       try {
         requiredItem.forEach(item => {
           if (
-            !state.signUpData.hasOwnProperty(item) ||
-            Object.values(state.signUpData[item]).some(value => value === '')
+            !signUpData.hasOwnProperty(item) ||
+            Object.values(signUpData[item]).some(value => value === '')
           ) {
             throw false
           }
@@ -179,17 +179,20 @@ const reducer = (state, action) => {
       } catch (status) {
         complete = status
       }
-      return { ...state, reject: !complete }
+      if (complete && privacy && portrait) {
+        status = false
+      }
+      return { ...state, reject: status }
     case 'CREATE_SIGNUPDATA':
-      const tempData = { ...state.signUpData }
+      const tempData = { ...signUpData }
       action.payload.dataValue
         ? (tempData[action.payload.dataKey] = action.payload.dataValue)
         : delete tempData[action.payload.dataKey]
       return { ...state, signUpData: { ...tempData } }
     case 'UPDATE_PHOTOINDEX':
-      return { ...state, photoIndex: action.payload, openModal: !state.openModal }
+      return { ...state, photoIndex: action.payload, openModal: !openModal }
     case 'CHANGE_MODAL_MODE':
-      return { ...state, openModal: !state.openModal }
+      return { ...state, openModal: !openModal }
     default:
       return state
   }

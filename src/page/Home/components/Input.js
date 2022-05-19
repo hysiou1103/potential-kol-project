@@ -71,7 +71,6 @@ export default function Input({ name = '', type = '', width = '', placeholder = 
   }
 
   useEffect(() => {
-    !initialVal && dispatch({ type: 'CHANGE_REJECT', payload: true })
     dispatch({
       type: 'CREATE_SIGNUPDATA',
       payload: {
