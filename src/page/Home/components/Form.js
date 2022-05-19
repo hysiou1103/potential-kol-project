@@ -17,7 +17,7 @@ export default function Form() {
       : dispatch({ type: 'CHANGE_PORTRAIT' })
   useEffect(() => {
     if (!privacy || !portrait) return
-    dispatch({ type: 'CHANGE_REJECT', payload: false })
+    dispatch({ type: 'CHANGE_REJECT' })
   }, [signUpData, privacy, portrait])
 
   const rejectBtn = useRef()
@@ -38,7 +38,6 @@ export default function Form() {
     const storageList = JSON.parse(localStorage.getItem('registInfor')) || []
     storageList.push(tempStorageData)
     localStorage.setItem('registInfor', JSON.stringify(storageList))
-    window.location.reload()
     navigate(`/votingActive`)
   }
 
@@ -166,7 +165,7 @@ const reducer = (state, action) => {
     case 'CHANGE_PORTRAIT':
       return { ...state, portrait: !state.portrait }
     case 'CHANGE_REJECT':
-      let complete = action.payload
+      let complete = false
       try {
         requiredItem.forEach(item => {
           if (
