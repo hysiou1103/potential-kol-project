@@ -169,7 +169,7 @@ const reducer = (state, action) => {
       try {
         requiredItem.forEach(item => {
           if (
-            !signUpData.hasOwnProperty(item) ||
+            signUpData[item] === '' ||
             Object.values(signUpData[item]).some(value => value === '')
           ) {
             throw false
@@ -185,9 +185,7 @@ const reducer = (state, action) => {
       return { ...state, reject: status }
     case 'CREATE_SIGNUPDATA':
       const tempData = { ...signUpData }
-      action.payload.dataValue
-        ? (tempData[action.payload.dataKey] = action.payload.dataValue)
-        : delete tempData[action.payload.dataKey]
+      tempData[action.payload.dataKey] = action.payload.dataValue
       return { ...state, signUpData: { ...tempData } }
     case 'UPDATE_PHOTOINDEX':
       return { ...state, photoIndex: action.payload, openModal: !openModal }

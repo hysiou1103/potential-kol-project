@@ -3,7 +3,7 @@ import { FormContext } from './Form'
 
 export default function Modal() {
   const { state, dispatch } = useContext(FormContext)
-  const { openModal, signUpData, photoIndex } = state
+  const { openModal = false, signUpData = {}, photoIndex = 'photo1' } = state
 
   const modalShow = useRef()
   useEffect(() => {

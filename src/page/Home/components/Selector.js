@@ -4,7 +4,7 @@ import { groups, years, months, days, cityList } from 'config'
 
 export default function Selector({ name = '', width = '' }) {
   const { state, dispatch } = useContext(FormContext)
-  const { signUpData } = state
+  const { signUpData = {} } = state
   const [selectedVal, setSelectedVal] = useState('default')
   const handleChange = e => {
     setSelectedVal(e.target.value)
