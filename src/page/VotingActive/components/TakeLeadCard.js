@@ -1,36 +1,34 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import crownIcon from 'imgs/crownIcon.png'
+import { Link } from 'react-router-dom'
+import style from './takeLeadCard.module.scss'
 
 export default function TakeLeadCard({ competitor = {} }) {
-  const groupTag = useRef()
-  useEffect(() => {
-    let groupName = ''
-    if (competitor.groups === '汪汪組') {
-      groupName = 'dogs'
-    } else {
-      groupName = 'cats'
-    }
-    groupTag.current.classList.add(`${groupName}`)
-  }, [competitor.groups])
+  const renderClass = ({ groups }) => {
+    return groups === '汪汪組' ? 'dogs' : 'cats'
+  }
 
   return (
-    <div className="leadCardWrap relative z-0">
-      <div className="crownWrap absolute z-1">
+    <Link
+      to={`/competitorDetail/${competitor.id}`}
+      className={`${style.leadCardWrap} relative z-0`}
+    >
+      <div className={`${style.crownWrap} absolute z-1`}>
         <img src={crownIcon} alt="Crown Icon" />
       </div>
-      <div className="leadCardBody" ref={groupTag}>
-        <div className="leadCardImg">
+      <div className={`${style.leadCardBody} ${style[renderClass(competitor)]}}`}>
+        <div className={style.leadCardImg}>
           <img src={competitor.photo1.src} alt="competitor" />
         </div>
-        <p className="eachGroup">{competitor.groups}</p>
-        <div className="leadInfor">
+        <p className={style.eachGroup}>{competitor.groups}</p>
+        <div className={style.leadInfor}>
           <p>{`NO.${competitor.id}`}</p>
           <p>{competitor.competitionID}</p>
         </div>
-        <div className="votes">
+        <div className={style.votes}>
           <strong>{competitor.votes}</strong> 票
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

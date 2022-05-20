@@ -1,22 +1,37 @@
+$primary : #3a4ae7;
+$secondary: #dc198c;
+$gray:#323232;
+$gray-800:rgba(50, 50, 50, 0.6);
+$alert: #d44211;
+$bg:#ffc9e6;
+$dogsGroup:#7b61ff;
+$catsGroup:#ff748e;
+
 @mixin desk {
   @media (min-width:1280px) {
     @content
   }
-};
+}
+
+;
 
 @mixin ipad {
   @media (min-width:768px) {
     @content
   }
-};
+}
 
-@mixin commonBtn($bg ,$color ,$width, $height){
+;
+
+@mixin commonBtn($bg, $color, $width, $height) {
   width: $width;
   height: $height;
-  line-height: $height ;
+  line-height: $height;
   border-radius: 5px;
   border: none;
   text-align: center;
   color: $color;
   background-color: $bg;
-};
+}
+
+;

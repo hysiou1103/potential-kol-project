@@ -2,10 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import signUp from 'imgs/signUp.png'
 import vote from 'imgs/vote.png'
+import style from './phoneNav.module.scss'
 
 export default function PhoneNav() {
   return (
-    <nav className="phoneNav">
+    <nav className={style.phoneNav}>
       <ul className="flex justify-around items-center">
         <li>
           <Link to="/" title="我要報名">

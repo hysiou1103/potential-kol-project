@@ -1,3 +1,5 @@
+@import 'styles/helpers/_mixin.scss';
+
 .leadCardWrap {
   padding: 15px;
   border-radius: 10px;
@@ -40,7 +42,7 @@
   }
 
   &.dogs {
-    strong {
+    .votesCount {
       color: $dogsGroup;
     }
 
@@ -50,7 +52,7 @@
   }
 
   &.cats {
-    strong {
+    .votesCount {
       color: $catsGroup;
     }
 
@@ -58,6 +60,7 @@
       background-color: $catsGroup;
     }
   }
+
 
   .votes {
     text-align: right;
@@ -82,8 +85,6 @@
     width: 280px;
     height: 280px;
   }
-
-
 }
 
 .eachGroup {
@@ -115,4 +116,17 @@
       font-size: 1.8rem;
     }
   }
+}
+
+.dogs {
+
+
+  strong {
+    color: $dogsGroup;
+  }
+
+  .eachGroup {
+    background-color: $dogsGroup;
+  }
+
 }

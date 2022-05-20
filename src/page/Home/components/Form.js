@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Input from './Input'
 import Selector from './Selector'
@@ -6,6 +6,7 @@ import UploadPhotoSection from './UploadPhotoSection'
 import Modal from './Modal'
 import { requiredItem } from 'config'
 import signUpForm from 'imgs/signUpForm.png'
+import style from './form.module.scss'
 
 export default function Form() {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -14,13 +15,6 @@ export default function Form() {
   useEffect(() => {
     dispatch({ type: 'CHANGE_REJECT' })
   }, [signUpData, privacy, portrait])
-
-  const rejectBtn = useRef()
-  useEffect(() => {
-    reject
-      ? rejectBtn.current.classList.add('disabled')
-      : rejectBtn.current.classList.remove('disabled')
-  }, [reject])
 
   const navigate = useNavigate()
   const saveListInBrowser = () => {
@@ -38,34 +32,34 @@ export default function Form() {
   return (
     <FormContext.Provider value={{ state, dispatch }}>
       <img src={signUpForm} alt="Sign Up Form" />
-      <main className="formWrap">
-        <div className="inputGroup">
+      <main className={style.formWrap}>
+        <div className={style.inputGroup}>
           <label htmlFor="name">姓名</label>
-          <div className="inputWrap">
+          <div className={style.inputWrap}>
             <Input type="text" name="name" />
           </div>
         </div>
-        <div className="inputGroup">
+        <div className={style.inputGroup}>
           <label htmlFor="email">Email</label>
-          <div className="inputWrap">
+          <div className={style.inputWrap}>
             <Input type="email" name="email" />
           </div>
         </div>
-        <div className="inputGroup">
+        <div className={style.inputGroup}>
           <label htmlFor="phone">電話</label>
-          <div className="inputWrap">
+          <div className={style.inputWrap}>
             <Input type="tel" name="phone" maximun={12} />
           </div>
         </div>
-        <div className="selectGroup">
+        <div className={style.selectGroup}>
           <label htmlFor="group">報名組別</label>
-          <div className="selectWrap">
+          <div className={style.selectWrap}>
             <Selector name="groups" />
           </div>
         </div>
-        <div className="inputGroup">
+        <div className={`${style.inputGroup}`}>
           <label htmlFor="competitionID">參賽名稱</label>
-          <div className="inputWrap full">
+          <div className={`${style.inputWrap} ${style.full}`}>
             <Input
               type="text"
               name="competitionID"
@@ -75,9 +69,9 @@ export default function Form() {
             />
           </div>
         </div>
-        <div className="inputGroup">
+        <div className={`${style.inputGroup}`}>
           <label htmlFor="selfIntro">介紹說明</label>
-          <div className="inputWrap full">
+          <div className={`${style.inputWrap} ${style.full}`}>
             <Input
               type="text"
               name="selfIntro"
@@ -87,36 +81,36 @@ export default function Form() {
             />
           </div>
         </div>
-        <div className="selectGroup">
+        <div className={style.selectGroup}>
           <label htmlFor="years">出生年月日</label>
-          <div className="selectWrap">
+          <div className={style.selectWrap}>
             <Selector name="years" width="1/3" />
             <Selector name="months" width="1/3" />
             <Selector name="days" width="1/3" />
           </div>
         </div>
-        <div className="uploadGroup">
+        <div className={style.uploadGroup}>
           <UploadPhotoSection placeHolder={{ value: 'photo1', label: '照片1' }} />
         </div>
-        <div className="uploadGroup">
+        <div className={style.uploadGroup}>
           <UploadPhotoSection placeHolder={{ value: 'photo2', label: '照片2' }} />
         </div>
-        <div className="uploadGroup">
+        <div className={style.uploadGroup}>
           <UploadPhotoSection placeHolder={{ value: 'photo3', label: '照片3' }} />
         </div>
-        <div className="selectGroup">
+        <div className={style.selectGroup}>
           <label htmlFor="city">收件人地址</label>
-          <div className="selectWrap">
+          <div className={style.selectWrap}>
             <Selector name="city" width="1/2" />
             <Selector name="district" width="1/2" />
             <Input type="text" name="detailAddress" width="full" placeholder="請填寫詳細地址" />
-            <p className="addressReminder">
+            <p className={style.addressReminder}>
               此收件人及地址為獎品寄送所需個資，請務必填寫正確，若未正確填寫，將視同放棄獎品!
             </p>
           </div>
         </div>
-        <div className="policyAgreement">
-          <div className="checkboxGroup">
+        <div className={style.policyAgreement}>
+          <div className={style.checkboxGroup}>
             <input
               type="checkbox"
               id="privacyPolicy"
@@ -127,11 +121,11 @@ export default function Form() {
               }}
             />
             <label htmlFor="privacyPolicy">
-              我同意東森購物條款 <span className="popUP">隱私權保護政策</span> 及
-              <span className="popUP">隱私聲明</span>。
+              我同意東森購物條款 <span className={style.popUP}>隱私權保護政策</span> 及
+              <span className={style.popUP}>隱私聲明</span>。
             </label>
           </div>
-          <div className="checkboxGroup">
+          <div className={style.checkboxGroup}>
             <input
               type="checkbox"
               id="portraitRights"
@@ -147,7 +141,10 @@ export default function Form() {
             </label>
           </div>
         </div>
-        <button ref={rejectBtn} className="formBtn" onClick={saveListInBrowser}>
+        <button
+          className={`${style.formBtn} ${reject ? style.disabled : null}`}
+          onClick={saveListInBrowser}
+        >
           送出報名
         </button>
         <Modal key={photoIndex} />
@@ -202,6 +199,7 @@ const initialState = {
   reject: true,
   openModal: false,
   photoIndex: 'photo1',
+  rejectBtnClassName: '',
   signUpData: {
     name: '',
     email: '',

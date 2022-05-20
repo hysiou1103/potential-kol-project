@@ -1,0 +1,47 @@
+@import 'styles/helpers/_mixin.scss';
+
+.competitorDetailWrap {
+  gap: 30px;
+  padding: 15px;
+  margin-top: 15px;
+  background-color: white;
+
+  @include ipad {
+    padding: 50px;
+    margin-top: 30px;
+  }
+
+}
+
+.competitorContent {
+
+  &.dogs {
+    strong {
+      color: $dogsGroup;
+    }
+
+  }
+
+  &.cats {
+    strong {
+      color: $catsGroup;
+    }
+  }
+}
+
+.reminderText {
+  text-align: center;
+  font-size: 1.4rem;
+
+  @include ipad {
+    font-size: 1.6rem;
+  }
+
+  strong {
+    font-size: 2rem;
+
+    @include ipad {
+      font-size: 2.4rem;
+    }
+  }
+}

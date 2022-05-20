@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { FormContext } from './Form'
+import style from './input.module.scss'
 
 export default function Input({ name = '', type = '', width = '', placeholder = '', maximun = 0 }) {
   const { dispatch } = useContext(FormContext)
@@ -85,14 +86,14 @@ export default function Input({ name = '', type = '', width = '', placeholder = 
       <input
         type={type}
         id={name}
-        className={width ? 'full' : null}
+        className={`${width && style.full}`}
         placeholder={placeholder}
         maxLength={maximun || null}
         value={processVal}
         onChange={handleChange}
         onBlur={handleValidate}
       />
-      {errMsg && <p className="errMsg">{errMsg}</p>}
+      {errMsg && <p className={style.errMsg}>{errMsg}</p>}
     </>
   )
 }

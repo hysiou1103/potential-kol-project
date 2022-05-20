@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import uploadFile from 'imgs/uploadFile.png'
 import { FormContext } from './Form'
+import style from './uploadPhotoSection.module.scss'
 
 export default function UploadPhotoSection({ placeHolder = {} }) {
   const { state, dispatch } = useContext(FormContext)
@@ -9,9 +10,9 @@ export default function UploadPhotoSection({ placeHolder = {} }) {
   return (
     <>
       <label>上傳{placeHolder.label}</label>
-      <div className="uploadWrap">
+      <div className={style.uploadWrap}>
         <button
-          className="uploadBtn"
+          className={style.uploadBtn}
           onClick={() => {
             dispatch({
               type: 'UPDATE_PHOTOINDEX',
@@ -22,7 +23,7 @@ export default function UploadPhotoSection({ placeHolder = {} }) {
           <img src={uploadFile} alt="Upload File Icon" width="22" height="15" />
           <span>選擇檔案</span>
         </button>
-        <div className="fileInfor">
+        <div className={style.fileInfor}>
           <p>{signUpData[keyName].fileName ? signUpData[keyName].fileName : null}</p>
           <p>檔案大小不得超過5MB，建議尺寸為正方形(最少1張、最多3張)</p>
         </div>

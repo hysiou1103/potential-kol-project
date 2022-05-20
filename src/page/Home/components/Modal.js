@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { FormContext } from './Form'
+import style from './modal.module.scss'
 
 export default function Modal() {
   const { state, dispatch } = useContext(FormContext)
   const { openModal = false, signUpData = {}, photoIndex = 'photo1' } = state
-
-  const modalShow = useRef()
-  useEffect(() => {
-    openModal ? modalShow.current.classList.add('show') : modalShow.current.classList.remove('show')
-  }, [openModal])
 
   useEffect(() => {
     signUpData[photoIndex] &&
@@ -57,29 +53,32 @@ export default function Modal() {
   }
 
   return (
-    <div className="modalBg" ref={modalShow}>
-      <div className="modalWrap">
-        <div className="modalHeader">
+    <div
+      className={`${style.modalBg} ${openModal ? style.show : null}
+`}
+    >
+      <div className={style.modalWrap}>
+        <div className={style.modalHeader}>
           <p>{photoObj.fileName}</p>
           <span
-            className="closeIcon relative z-0"
+            className={`${style.closeIcon} relative z-0`}
             onClick={() => {
               modalController('cancel')
             }}
           />
         </div>
-        <div className="modalBody">
-          <div className="photoGroup">
+        <div className={style.modalBody}>
+          <div className={style.photoGroup}>
             <label htmlFor="photo">上傳圖片</label>
             <input type="file" id="photo" ref={imgUpload} onChange={handleChange} />
           </div>
-          <div className="fileGroup">
+          <div className={style.fileGroup}>
             {photoObj.src && <img src={photoObj.src} alt="signUpPhoto" />}
           </div>
         </div>
-        <div className="modalFooter">
+        <div className={style.modalFooter}>
           <button
-            className="modalBtn cancel"
+            className={`${style.modalBtn} ${style.cancel}`}
             onClick={() => {
               modalController('cancel')
             }}
@@ -87,7 +86,7 @@ export default function Modal() {
             取消
           </button>
           <button
-            className="modalBtn submit"
+            className={`${style.modalBtn} ${style.submit}`}
             onClick={() => {
               modalController('save')
             }}

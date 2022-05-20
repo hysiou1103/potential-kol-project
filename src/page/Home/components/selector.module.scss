@@ -1,4 +1,6 @@
-.selectWrap select {
+@import 'styles/helpers/_mixin.scss';
+
+select {
   width: 100%;
   padding: 10px;
   border-radius: 4px;

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { FormContext } from './Form'
 import { groups, years, months, days, cityList } from 'config'
+import style from './selector.module.scss'
 
 export default function Selector({ name = '', width = '' }) {
   const { state, dispatch } = useContext(FormContext)
@@ -43,7 +44,7 @@ export default function Selector({ name = '', width = '' }) {
       id={name}
       value={selectedVal}
       onChange={handleChange}
-      className={updateClassName(width)}
+      className={style[updateClassName(width)]}
     >
       {createOption()}
     </select>

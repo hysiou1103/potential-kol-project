@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Logo from 'imgs/Logo.png'
 import fbIcon from 'imgs/fb-icon.png'
 import lineIcon from 'imgs/line-icon.png'
+import style from './navbar.module.scss'
 
 export default function Navbar() {
   return (
@@ -11,7 +12,7 @@ export default function Navbar() {
         <Link to="/" title="ETmall" className="logo">
           <img src={Logo} alt="ETmall" width="115" height="40" />
         </Link>
-        <div className="linkWrap flex justify-end items-center">
+        <div className={`${style.linkWrap} flex justify-end items-center`}>
           <nav>
             <ul className="flex">
               <li>
