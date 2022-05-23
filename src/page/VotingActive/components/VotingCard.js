@@ -1,17 +1,9 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './votingCard.module.scss'
 
 export default function VotingCard({ competitor = {} }) {
-  const groupTag = useRef()
-  const votesColor = useRef()
-  useEffect(() => {
-    const groupName = renderClass(competitor)
-    groupTag.current.classList.add(`${groupName}`)
-    votesColor.current.classList.add(`${groupName}`)
-  }, [])
-
-  const renderClass = ({ groups }) => {
+  const updateClass = ({ groups }) => {
     return groups === '汪汪組' ? 'dogs' : 'cats'
   }
 
@@ -23,14 +15,16 @@ export default function VotingCard({ competitor = {} }) {
       <Link to={`/competitorDetail/${competitor.id}`} className={style.votingCardImg}>
         <img src={competitor.photo1.src} alt="competitor" />
       </Link>
-      <div className={`${style.votingIntro} flex justify-between items-center w-full`}>
+      <div
+        className={`${style.votingIntro} ${
+          style[updateClass(competitor)]
+        } flex justify-between items-center w-full`}
+      >
         <div className={`${style.votingCardInfor} flex flex-col`}>
-          <div className={style.groupTag} ref={groupTag}>
-            {competitor.groups}
-          </div>
+          <div className={style.groupTag}>{competitor.groups}</div>
           <div className={style.competitorId}>{competitor.competitionID}</div>
         </div>
-        <div className={`${style.votingRelative} flex items-center`} ref={votesColor}>
+        <div className={`${style.votingRelative} flex items-center`}>
           <div className={`${style.votes} flex items-center`}>
             票數 <strong>{competitor.votes}</strong>
           </div>

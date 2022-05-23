@@ -41,6 +41,28 @@
 .votingIntro {
   flex-wrap: wrap;
   margin-left: 15px;
+
+  &.dogs {
+    strong {
+      color: $dogsGroup
+    }
+
+    .groupTag,
+    .votingBtn {
+      background-color: $dogsGroup;
+    }
+  }
+
+  &.cats {
+    strong {
+      color: $catsGroup
+    }
+
+    .groupTag,
+    .votingBtn {
+      background-color: $catsGroup;
+    }
+  }
 }
 
 .votingCardInfor {
@@ -66,16 +88,6 @@
     height: 31px;
     line-height: 31px;
     font-size: 1.6rem;
-  }
-
-  &.dogs {
-    background-color: $dogsGroup;
-
-  }
-
-  &.cats {
-    background-color: $catsGroup;
-
   }
 
 }
@@ -144,27 +156,6 @@
     }
   }
 
-  &.dogs {
-    strong {
-      color: $dogsGroup
-    }
-
-    .votingBtn {
-      background-color: $dogsGroup;
-
-    }
-  }
-
-  &.cats {
-    strong {
-      color: $catsGroup
-    }
-
-    .votingBtn {
-      background-color: $catsGroup;
-
-    }
-  }
 
 
 }

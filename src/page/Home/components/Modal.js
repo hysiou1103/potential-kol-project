@@ -54,7 +54,7 @@ export default function Modal() {
 
   return (
     <div
-      className={`${style.modalBg} ${openModal ? style.show : null}
+      className={`${style.modalBg} ${openModal ? style.show : ''}
 `}
     >
       <div className={style.modalWrap}>

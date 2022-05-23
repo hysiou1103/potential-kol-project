@@ -142,7 +142,7 @@ export default function Form() {
           </div>
         </div>
         <button
-          className={`${style.formBtn} ${reject ? style.disabled : null}`}
+          className={`${style.formBtn} ${reject ? style.disabled : ''}`}
           onClick={saveListInBrowser}
         >
           送出報名
