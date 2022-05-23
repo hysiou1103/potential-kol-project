@@ -1,34 +1,100 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import Swiper from './components/Swiper'
+import goBack from 'imgs/goBack.png'
 import style from './competitorDetail.module.scss'
 
 export default function CompetitorDetail() {
   const { competitorId } = useParams()
+
+  const [listInBrowser, setListInBrowser] = useState([])
   const [competitorData, setCompetitorData] = useState({})
+  const { groups, competitionID, id, selfIntro, votes } = competitorData
   useEffect(() => {
     const votingList = JSON.parse(localStorage.getItem('registInfor')) || []
     const data = votingList.filter(item => item.id === parseInt(competitorId))
-    setCompetitorData({ ...data })
+    setListInBrowser([...votingList])
+    setCompetitorData(...data)
   }, [])
+
+  const [clickAnimation, setClickAnimation] = useState(false)
+  const handleVotes = () => {
+    const { votes } = competitorData
+    const tempData = { ...competitorData, votes: votes + 1 }
+    setCompetitorData(tempData)
+    setClickAnimation(!clickAnimation)
+    updateList(tempData)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setClickAnimation(!setClickAnimation)
+    }, 300)
+  }, [clickAnimation])
+
+  const updateList = tempData => {
+    const tempList = [...listInBrowser]
+    tempList.splice(tempData.id - 1, 1, tempData)
+    setListInBrowser(tempList)
+    localStorage.removeItem('registInfor')
+    localStorage.setItem('registInfor', JSON.stringify(tempList))
+  }
 
   const renderClass = ({ groups }) => {
     return groups === '汪汪組' ? 'dogs' : 'cats'
   }
+
   return (
-    <main className={`${style.competitorDetailWrap} container flex items-center justify-between`}>
-      <Swiper />
-      <section
-        className={`${style.competitorContent} flex flex-col ${style[renderClass(competitorData)]}`}
-      >
-        <div className={style.competitorHeader}>
-          <div></div>
-          <div className={style.competitorOrder}>{competitorData.id}</div>
+    <main>
+      <div className={`${style.competitorDetailWrap} container`}>
+        <div className={`${style.competitorInfor} flex`}>
+          <Swiper />
+          <section className={`w-full ${style[renderClass(competitorData)]} `}>
+            <Link
+              to="/votingActive"
+              className={`${style.goBackBtn} ${style.phone} justify-center items-center`}
+            >
+              <img src={goBack} alt="Go Back arrow" width="24" height="24" />
+              <span>返回列表</span>
+            </Link>
+            <div className={style.tagWrap}>
+              <div className={style.groupTag}>{groups}</div>
+            </div>
+            <div className={`${style.competitorContent} flex flex-col justify-between`}>
+              <div className={style.competitorHeader}>
+                <div className={style.competitonID}>{competitionID}</div>
+                <div className={style.competitorOrder}>NO.{id}</div>
+              </div>
+              <div className={style.introSection}>
+                <p className={style.introTitle}>介紹</p>
+                <p className={style.introContent}>{selfIntro}</p>
+              </div>
+              <div className={style.currentVotes}>
+                目前票數 <strong>{votes}</strong> 票
+              </div>
+              <button
+                className={`${style.getingVotes} ${
+                  clickAnimation ? style.active : ''
+                } relative z-0`}
+                onClick={handleVotes}
+              >
+                投我一票
+              </button>
+              <p className={style.reminderText}>
+                不限次數分享，分享1次加1票，最多加<strong>2</strong>票
+              </p>
+            </div>
+          </section>
         </div>
-        <p className={style.reminderText}>
-          不限次數分享，分享1次加1票，最多加<strong>2</strong>票
-        </p>
-      </section>
+        <Link
+          to="/votingActive"
+          className={`${style.goBackBtn} ${style.web} justify-center items-center`}
+        >
+          <img src={goBack} alt="Go Back arrow" width="24" height="24" />
+          <span>返回列表</span>
+        </Link>
+      </div>
     </main>
   )
 }

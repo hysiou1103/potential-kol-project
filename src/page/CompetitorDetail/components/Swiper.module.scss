@@ -1,0 +1,15 @@
+@import 'styles/helpers/_mixin.scss';
+
+.swiperWrap {
+  width: 50%;
+}
+
+.imgWrap {
+  max-width: 300px;
+  height: 415px;
+
+  @include ipad {
+    max-width: 415px;
+    height: 415px
+  }
+}
