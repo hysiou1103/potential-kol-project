@@ -32,51 +32,29 @@
   }
 }
 
-.leadCardBody {
-  overflow: hidden;
-  font-size: 1.2rem;
-  color: $gray;
+.votes {
+  text-align: right;
 
-  @include ipad {
-    font-size: 1.6rem
-  }
+  strong {
+    font-size: 1.6rem;
+    color: $gray;
 
-  &.cats {
-    strong {
-      color: $catsGroup;
+    @include ipad {
+      font-size: 2.4rem;
     }
 
-    .eachGroup {
-      background-color: $catsGroup;
-    }
-  }
-
-  &.dogs {
-    strong {
+    &.dogs {
       color: $dogsGroup;
     }
 
-    .eachGroup {
-      background-color: $dogsGroup;
-    }
-  }
-
-
-
-  .votes {
-    text-align: right;
-
-    strong {
-      font-size: 1.6rem;
-
-      @include ipad {
-        font-size: 2.4rem;
-      }
+    &.cats {
+      color: $catsGroup;
     }
   }
 }
 
 .leadCardImg {
+  max-width: 100%;
   width: 150px;
   height: 150px;
   border-radius: 10px 10px 0 0;
@@ -91,7 +69,20 @@
 .eachGroup {
   text-align: center;
   line-height: 1.88;
+  font-size: 1.2rem;
   color: white;
+
+  @include ipad {
+    font-size: 1.6rem;
+  }
+
+  &.dogs {
+    background-color: $dogsGroup;
+  }
+
+  &.cats {
+    background-color: $catsGroup;
+  }
 }
 
 .leadInfor {
@@ -112,6 +103,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     font-size: 1.4rem;
+    color: $gray;
 
     @include ipad {
       font-size: 1.8rem;

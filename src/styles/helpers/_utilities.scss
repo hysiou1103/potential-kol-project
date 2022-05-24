@@ -14,7 +14,8 @@ a {
 .container {
   max-width: 990px;
   padding: 0 15px;
-  margin: 0 auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .flex {
@@ -43,6 +44,10 @@ a {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .relative {

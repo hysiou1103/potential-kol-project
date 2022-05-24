@@ -4,12 +4,47 @@
   width: 50%;
 }
 
-.imgWrap {
-  max-width: 300px;
-  height: 415px;
+.imgContainer {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 15px;
+  background-color: #f7f7f7;
 
   @include ipad {
-    max-width: 415px;
-    height: 415px
+    width: 415px;
+    height: 415px;
+  }
+}
+
+.imgWrap {
+  transform: translateX(0);
+  transition: transform 0.5s ease-in-out;
+  background-color: #f7f7f7;
+
+  &.fitst {
+    transform: translateX(0);
+  }
+
+  &.second {
+    transform: translateX(-415px);
+  }
+
+  &.third {
+    transform: translateX(-830px);
+  }
+}
+
+
+.selectDot {
+  gap: 5px;
+  padding: 5px;
+
+  li {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #bdbdbd;
   }
 }

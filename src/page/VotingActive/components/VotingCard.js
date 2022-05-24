@@ -9,9 +9,7 @@ export default function VotingCard({ competitor = {} }) {
 
   return (
     <div className={`${style.votingCard} flex items-center w-full relative z-0`}>
-      <div className={`${style.orderWrap} absolute z-1`}>
-        <p>NO.{competitor.id}</p>
-      </div>
+      <div className={`${style.orderWrap} absolute z-1`}>NO.{competitor.id}</div>
       <Link to={`/competitorDetail/${competitor.id}`} className={style.votingCardImg}>
         <img src={competitor.photo1.src} alt="competitor" />
       </Link>

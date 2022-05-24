@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { FormContext } from './Form'
+import useValidator from 'components/useValidator'
 import style from './input.module.scss'
 
 export default function Input({ name = '', type = '', width = '', placeholder = '', maximun = 0 }) {
@@ -11,64 +12,31 @@ export default function Input({ name = '', type = '', width = '', placeholder = 
 
   const [errMsg, setErrMsg] = useState('')
   const [initialVal, setInitialVal] = useState('')
+  const { validations } = useValidator()
   const handleValidate = () => {
     let errMsg = ''
-    let RegExp = ''
-    let newVal = processVal
     let initVal = processVal
-    let testResult = false
-    if (processVal) {
-      switch (name) {
-        case 'name':
-          RegExp = /^[a-zA-z\u4e00-\u9ffa5,.'-]{2,}$/i
-          testResult = RegExp.test(processVal)
-          if (!testResult) {
-            errMsg = '請輸入正確姓名'
-            initVal = ''
-          }
-          break
-        case 'email':
-          RegExp =
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-          testResult = RegExp.test(processVal)
-          if (testResult) {
-            const accountArr = processVal.split('@')[0].split('')
-            const suffix = processVal.split('@')[1]
-            accountArr.forEach((item, index, arr) => {
-              index % 2 === 1 ? (arr[index] = '*') : (arr[index] = item)
-            })
-            newVal = `${accountArr.join('')}@${suffix}`
-          } else {
-            errMsg = '請輸入正確信箱'
-            initVal = ''
-          }
-          break
-        case 'phone':
-          RegExp = /(\w{2,3}-?|\(\w{2,3}\))\w{3,4}-?\w{4}|09\w{2}(\w{6}|-\w{3}-\w{3})/
-          testResult = RegExp.test(processVal)
-          if (!testResult) {
-            errMsg = '請輸入正確電話號碼'
-            initVal = ''
-          }
-          break
-        case 'competitionID':
-          RegExp = /^[A-Za-z\u4e00-\u9fa5]{1,20}$/
-          testResult = RegExp.test(processVal)
-          if (!testResult) {
-            errMsg = '不可輸入特殊符號'
-            initVal = ''
-          }
-          break
-        default:
-          break
-      }
-    } else {
-      errMsg = '此欄位為必填項目'
-      initVal = ''
+    const verifiedItem = validations[name]
+
+    //Required
+    if (verifiedItem.required && !processVal) {
+      errMsg = verifiedItem.required.message
     }
-    setInitialVal(initVal)
-    setProcessVal(newVal)
+
+    //Pattern
+    const pattern = verifiedItem.pattern
+    if (processVal && pattern && !pattern.RegExp.test(processVal)) {
+      errMsg = pattern.message
+      initVal = pattern.clearInvalidInput
+    }
+
+    //Encryption
+    if (processVal && verifiedItem.encryption) {
+      const encryptVal = verifiedItem.encryption.excryFn(initVal)
+      setProcessVal(encryptVal)
+    }
     setErrMsg(errMsg)
+    setInitialVal(initVal)
   }
 
   useEffect(() => {

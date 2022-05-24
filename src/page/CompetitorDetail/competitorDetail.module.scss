@@ -137,7 +137,8 @@ main {
 }
 
 .getingVotes {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   padding: 5px 10px;
   border-radius: 5px 5px 0 0;
   width: 145px;
@@ -204,7 +205,8 @@ main {
 
   &.web {
     display: none;
-    margin: 0 auto;
+    margin-right: auto;
+    margin-left: auto;
 
     @include ipad {
       display: flex;

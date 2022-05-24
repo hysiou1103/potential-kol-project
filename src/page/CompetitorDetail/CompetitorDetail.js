@@ -10,7 +10,7 @@ export default function CompetitorDetail() {
 
   const [listInBrowser, setListInBrowser] = useState([])
   const [competitorData, setCompetitorData] = useState({})
-  const { groups, competitionID, id, selfIntro, votes } = competitorData
+  const { groups, competitionID, id, selfIntro, votes, photo1, photo2, photo3 } = competitorData
   useEffect(() => {
     const votingList = JSON.parse(localStorage.getItem('registInfor')) || []
     const data = votingList.filter(item => item.id === parseInt(competitorId))
@@ -49,7 +49,7 @@ export default function CompetitorDetail() {
     <main>
       <div className={`${style.competitorDetailWrap} container`}>
         <div className={`${style.competitorInfor} flex`}>
-          <Swiper />
+          <Swiper photoGroup={[photo1, photo2, photo3]} />
           <section className={`w-full ${style[renderClass(competitorData)]} `}>
             <Link
               to="/votingActive"

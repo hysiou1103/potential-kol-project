@@ -16,18 +16,16 @@ export default function TakeLeadCard({ competitor = {} }) {
       <div className={`${style.crownWrap} absolute z-1`}>
         <img src={crownIcon} alt="Crown Icon" />
       </div>
-      <div className={`${style.leadCardBody} ${style[updateClass(competitor)]}`}>
-        <div className={style.leadCardImg}>
-          <img src={competitor.photo1.src} alt="competitor" />
-        </div>
-        <p className={style.eachGroup}>{competitor.groups}</p>
-        <div className={style.leadInfor}>
-          <p>{`NO.${competitor.id}`}</p>
-          <p>{competitor.competitionID}</p>
-        </div>
-        <div className={style.votes}>
-          <strong>{competitor.votes}</strong> 票
-        </div>
+      <div className={style.leadCardImg}>
+        <img src={competitor.photo1.src} alt="competitor" />
+      </div>
+      <p className={`${style.eachGroup} ${style[updateClass(competitor)]}`}>{competitor.groups}</p>
+      <div className={style.leadInfor}>
+        <p>{`NO.${competitor.id}`}</p>
+        <p>{competitor.competitionID}</p>
+      </div>
+      <div className={style.votes}>
+        <strong className={style[updateClass(competitor)]}>{competitor.votes}</strong> 票
       </div>
     </Link>
   )
