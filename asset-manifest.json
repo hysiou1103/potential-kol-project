@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/potential-kol-project/static/css/main.8fc87e19.css",
-    "main.js": "/potential-kol-project/static/js/main.15a3c3a8.js",
+    "main.css": "/potential-kol-project/static/css/main.b930c062.css",
+    "main.js": "/potential-kol-project/static/js/main.7c17a706.js",
     "static/js/787.61f2d9ba.chunk.js": "/potential-kol-project/static/js/787.61f2d9ba.chunk.js",
     "static/media/bg.png": "/potential-kol-project/static/media/bg.029df7102aee3cd8a882.png",
     "static/media/banner.png": "/potential-kol-project/static/media/banner.c39efa38bea0cdef680f.png",
@@ -9,12 +9,12 @@
     "static/media/signUpForm.png": "/potential-kol-project/static/media/signUpForm.27efa2eacdc04025086f.png",
     "static/media/votingSection.png": "/potential-kol-project/static/media/votingSection.517419e010fc848df089.png",
     "index.html": "/potential-kol-project/index.html",
-    "main.8fc87e19.css.map": "/potential-kol-project/static/css/main.8fc87e19.css.map",
-    "main.15a3c3a8.js.map": "/potential-kol-project/static/js/main.15a3c3a8.js.map",
+    "main.b930c062.css.map": "/potential-kol-project/static/css/main.b930c062.css.map",
+    "main.7c17a706.js.map": "/potential-kol-project/static/js/main.7c17a706.js.map",
     "787.61f2d9ba.chunk.js.map": "/potential-kol-project/static/js/787.61f2d9ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8fc87e19.css",
-    "static/js/main.15a3c3a8.js"
+    "static/css/main.b930c062.css",
+    "static/js/main.7c17a706.js"
   ]
 }
