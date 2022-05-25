@@ -9,7 +9,7 @@ export default function UploadPhotoSection({ placeHolder = {} }) {
   const keyName = placeHolder.value
   return (
     <>
-      <label>上傳{placeHolder.label}</label>
+      <label className="flex items-center">上傳{placeHolder.label}</label>
       <div className={style.uploadWrap}>
         <button
           className={style.uploadBtn}

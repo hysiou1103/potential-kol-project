@@ -32,33 +32,43 @@ export default function Form() {
   return (
     <FormContext.Provider value={{ state, dispatch }}>
       <img src={signUpForm} alt="Sign Up Form" />
-      <main className={style.formWrap}>
-        <div className={style.inputGroup}>
-          <label htmlFor="name">姓名</label>
+      <main className={`${style.formWrap} w-full`}>
+        <div className={`${style.inputGroup} flex`}>
+          <label className="flex items-center" htmlFor="name">
+            姓名
+          </label>
           <div className={style.inputWrap}>
             <Input type="text" name="name" />
           </div>
         </div>
-        <div className={style.inputGroup}>
-          <label htmlFor="email">Email</label>
+        <div className={`${style.inputGroup} flex`}>
+          <label className="flex items-center" htmlFor="email">
+            Email
+          </label>
           <div className={style.inputWrap}>
             <Input type="email" name="email" />
           </div>
         </div>
-        <div className={style.inputGroup}>
-          <label htmlFor="phone">電話</label>
+        <div className={`${style.inputGroup} flex`}>
+          <label className="flex items-center" htmlFor="phone">
+            電話
+          </label>
           <div className={style.inputWrap}>
             <Input type="tel" name="phone" maximun={12} />
           </div>
         </div>
-        <div className={style.selectGroup}>
-          <label htmlFor="group">報名組別</label>
-          <div className={style.selectWrap}>
+        <div className={`${style.selectGroup} flex`}>
+          <label className="flex items-center" htmlFor="group">
+            報名組別
+          </label>
+          <div className={`${style.selectWrap} flex`}>
             <Selector name="groups" />
           </div>
         </div>
-        <div className={`${style.inputGroup}`}>
-          <label htmlFor="competitionID">參賽名稱</label>
+        <div className={`${style.inputGroup} flex`}>
+          <label className="flex items-center" htmlFor="competitionID">
+            參賽名稱
+          </label>
           <div className={`${style.inputWrap} ${style.full}`}>
             <Input
               type="text"
@@ -69,8 +79,10 @@ export default function Form() {
             />
           </div>
         </div>
-        <div className={`${style.inputGroup}`}>
-          <label htmlFor="selfIntro">介紹說明</label>
+        <div className={`${style.inputGroup} flex`}>
+          <label className="flex items-center" htmlFor="selfIntro">
+            介紹說明
+          </label>
           <div className={`${style.inputWrap} ${style.full}`}>
             <Input
               type="text"
@@ -81,35 +93,39 @@ export default function Form() {
             />
           </div>
         </div>
-        <div className={style.selectGroup}>
-          <label htmlFor="years">出生年月日</label>
-          <div className={style.selectWrap}>
+        <div className={`${style.selectGroup} flex`}>
+          <label className="flex items-center" htmlFor="years">
+            出生年月日
+          </label>
+          <div className={`${style.selectWrap} flex`}>
             <Selector name="years" width="1/3" />
             <Selector name="months" width="1/3" />
             <Selector name="days" width="1/3" />
           </div>
         </div>
-        <div className={style.uploadGroup}>
+        <div className={`${style.uploadGroup} flex`}>
           <UploadPhotoSection placeHolder={{ value: 'photo1', label: '照片1' }} />
         </div>
-        <div className={style.uploadGroup}>
+        <div className={`${style.uploadGroup} flex`}>
           <UploadPhotoSection placeHolder={{ value: 'photo2', label: '照片2' }} />
         </div>
-        <div className={style.uploadGroup}>
+        <div className={`${style.uploadGroup} flex`}>
           <UploadPhotoSection placeHolder={{ value: 'photo3', label: '照片3' }} />
         </div>
-        <div className={style.selectGroup}>
-          <label htmlFor="city">收件人地址</label>
-          <div className={style.selectWrap}>
+        <div className={`${style.selectGroup} flex`}>
+          <label className="flex items-center" htmlFor="city">
+            收件人地址
+          </label>
+          <div className={`${style.selectWrap} flex`}>
             <Selector name="city" width="1/2" />
             <Selector name="district" width="1/2" />
             <Input type="text" name="detailAddress" width="full" placeholder="請填寫詳細地址" />
-            <p className={style.addressReminder}>
+            <p className={`${style.addressReminder} w-full`}>
               此收件人及地址為獎品寄送所需個資，請務必填寫正確，若未正確填寫，將視同放棄獎品!
             </p>
           </div>
         </div>
-        <div className={style.policyAgreement}>
+        <div className={`${style.policyAgreement} flex flex-col items-end`}>
           <div className={style.checkboxGroup}>
             <input
               type="checkbox"

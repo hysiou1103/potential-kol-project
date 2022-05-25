@@ -12,10 +12,11 @@ export default function Input({ name = '', type = '', width = '', placeholder = 
 
   const [errMsg, setErrMsg] = useState('')
   const [initialVal, setInitialVal] = useState('')
-  const { validations } = useValidator()
+  const validations = useValidator()
   const handleValidate = () => {
     let errMsg = ''
     let initVal = processVal
+    let passRegExp = true
     const verifiedItem = validations[name]
 
     //Required
@@ -24,17 +25,20 @@ export default function Input({ name = '', type = '', width = '', placeholder = 
     }
 
     //Pattern
+
     const pattern = verifiedItem.pattern
     if (processVal && pattern && !pattern.RegExp.test(processVal)) {
+      passRegExp = false
       errMsg = pattern.message
       initVal = pattern.clearInvalidInput
     }
 
     //Encryption
-    if (processVal && verifiedItem.encryption) {
+    if (processVal && passRegExp && verifiedItem.encryption) {
       const encryptVal = verifiedItem.encryption.excryFn(initVal)
       setProcessVal(encryptVal)
     }
+
     setErrMsg(errMsg)
     setInitialVal(initVal)
   }

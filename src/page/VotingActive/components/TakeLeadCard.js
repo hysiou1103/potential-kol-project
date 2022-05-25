@@ -24,9 +24,9 @@ export default function TakeLeadCard({ competitor = {} }) {
         <p>{`NO.${competitor.id}`}</p>
         <p>{competitor.competitionID}</p>
       </div>
-      <div className={style.votes}>
+      <p className={style.votes}>
         <strong className={style[updateClass(competitor)]}>{competitor.votes}</strong> 票
-      </div>
+      </p>
     </Link>
   )
 }

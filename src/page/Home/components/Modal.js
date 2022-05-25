@@ -54,11 +54,10 @@ export default function Modal() {
 
   return (
     <div
-      className={`${style.modalBg} ${openModal ? style.show : ''}
-`}
+      className={`${style.modalBg} ${openModal ? style.show : ''} items-center justify-center z-1`}
     >
-      <div className={style.modalWrap}>
-        <div className={style.modalHeader}>
+      <div className={`${style.modalWrap} w-full`}>
+        <div className={`${style.modalHeader} flex justify-between`}>
           <p>{photoObj.fileName}</p>
           <span
             className={`${style.closeIcon} relative z-0`}
@@ -68,15 +67,15 @@ export default function Modal() {
           />
         </div>
         <div className={style.modalBody}>
-          <div className={style.photoGroup}>
+          <div className="flex justify-between items-center">
             <label htmlFor="photo">上傳圖片</label>
             <input type="file" id="photo" ref={imgUpload} onChange={handleChange} />
           </div>
-          <div className={style.fileGroup}>
+          <div className={`${style.fileGroup} w-full`}>
             {photoObj.src && <img src={photoObj.src} alt="signUpPhoto" />}
           </div>
         </div>
-        <div className={style.modalFooter}>
+        <div className={`${style.modalFooter} flex justify-center`}>
           <button
             className={`${style.modalBtn} ${style.cancel}`}
             onClick={() => {

@@ -1,7 +1,7 @@
 @import 'styles/helpers/_mixin.scss';
 
 .leadCardWrap {
-  padding: 15px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 2px 2px 3px rgba($color: $gray, $alpha: 0.2);
   max-width: 160px;
@@ -10,6 +10,7 @@
 
   @include ipad {
     max-width: 310px;
+    padding: 15px;
   }
 
   &:hover {
@@ -34,10 +35,10 @@
 
 .votes {
   text-align: right;
+  color: $gray;
 
   strong {
     font-size: 1.6rem;
-    color: $gray;
 
     @include ipad {
       font-size: 2.4rem;
@@ -54,7 +55,6 @@
 }
 
 .leadCardImg {
-  max-width: 100%;
   width: 150px;
   height: 150px;
   border-radius: 10px 10px 0 0;

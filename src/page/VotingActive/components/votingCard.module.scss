@@ -3,6 +3,7 @@
 .votingCard {
   padding: 20px 10px;
   border-radius: 10px;
+  color: $gray;
   background-color: white;
 
   @include ipad {
@@ -130,7 +131,6 @@
     @include ipad {
       width: 60%;
       justify-content: flex-end;
-
 
       strong {
         font-size: 5.6rem;

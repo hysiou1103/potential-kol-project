@@ -8,32 +8,35 @@ export default function VotingCard({ competitor = {} }) {
   }
 
   return (
-    <div className={`${style.votingCard} flex items-center w-full relative z-0`}>
-      <div className={`${style.orderWrap} absolute z-1`}>NO.{competitor.id}</div>
-      <Link to={`/competitorDetail/${competitor.id}`} className={style.votingCardImg}>
+    <Link
+      to={`/competitorDetail/${competitor.id}`}
+      className={`${style.votingCard} flex items-center relative z-0`}
+    >
+      <p className={`${style.orderWrap} absolute z-1`}>NO.{competitor.id}</p>
+      <div className={style.votingCardImg}>
         <img src={competitor.photo1.src} alt="competitor" />
-      </Link>
+      </div>
       <div
         className={`${style.votingIntro} ${
           style[updateClass(competitor)]
         } flex justify-between items-center w-full`}
       >
         <div className={`${style.votingCardInfor} flex flex-col`}>
-          <div className={style.groupTag}>{competitor.groups}</div>
-          <div className={style.competitorId}>{competitor.competitionID}</div>
+          <p className={style.groupTag}>{competitor.groups}</p>
+          <p className={style.competitorId}>{competitor.competitionID}</p>
         </div>
         <div className={`${style.votingRelative} flex items-center`}>
-          <div className={`${style.votes} flex items-center`}>
+          <p className={`${style.votes} flex items-center`}>
             票數 <strong>{competitor.votes}</strong>
-          </div>
-          <Link
+          </p>
+          <button
             to={`/competitorDetail/${competitor.id}`}
             className={`${style.votingBtn} flex justify-center items-center`}
           >
             前往投票
-          </Link>
+          </button>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

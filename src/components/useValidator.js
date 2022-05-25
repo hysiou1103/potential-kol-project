@@ -70,5 +70,5 @@ export default function useValidator() {
       }
     }
   }
-  return { validations }
+  return validations
 }

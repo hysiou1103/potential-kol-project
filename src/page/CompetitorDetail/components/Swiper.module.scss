@@ -1,7 +1,9 @@
 @import 'styles/helpers/_mixin.scss';
 
 .swiperWrap {
-  width: 50%;
+  @include ipad {
+    width: 50%;
+  }
 }
 
 .imgContainer {
@@ -12,8 +14,8 @@
   background-color: #f7f7f7;
 
   @include ipad {
-    width: 415px;
-    height: 415px;
+    width: 400px;
+    height: 400px;
   }
 }
 
@@ -22,16 +24,28 @@
   transition: transform 0.5s ease-in-out;
   background-color: #f7f7f7;
 
-  &.fitst {
+
+  &.first {
     transform: translateX(0);
   }
 
   &.second {
-    transform: translateX(-415px);
+    transform: translateX(-300px);
+
+    @include ipad {
+      transform: translateX(-415px);
+
+    }
   }
 
   &.third {
-    transform: translateX(-830px);
+    transform: translateX(-600px);
+
+    @include ipad {
+      transform: translateX(-830px);
+
+    }
+
   }
 }
 
@@ -46,5 +60,17 @@
     border-radius: 50%;
     cursor: pointer;
     background-color: #bdbdbd;
+  }
+}
+
+.dogs {
+  .active {
+    background-color: $dogsGroup;
+  }
+}
+
+.cats {
+  .active {
+    background-color: $catsGroup;
   }
 }

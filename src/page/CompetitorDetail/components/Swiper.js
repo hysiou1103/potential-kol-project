@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import style from './Swiper.module.scss'
 
-export default function Swiper({ photoGroup = [] }) {
+export default function Swiper({ photoGroup = [], groups = '' }) {
   const [renderGroup, setRenderPhoto] = useState([])
   useEffect(() => {
     if (checkObjectStatus(photoGroup)) {
@@ -12,25 +12,37 @@ export default function Swiper({ photoGroup = [] }) {
     }
   }, [photoGroup])
 
+  const [displayPhoto, setDisplayPhoto] = useState('first')
+  const [activeDot, setActiveDot] = useState(0)
+  const handleClick = e => {
+    if (e.target.nodeName !== 'LI') return
+    const chosenNum = parseInt(e.target.dataset.value)
+    setActiveDot(chosenNum)
+    if (chosenNum === 0) {
+      setDisplayPhoto('first')
+    } else if (chosenNum === 1) {
+      setDisplayPhoto('second')
+    } else {
+      setDisplayPhoto('third')
+    }
+  }
+
   const renderPhoto = renderItem => {
     return renderItem.map(item => <img key={item.fileName} src={item.src} />)
   }
 
   const renderPhotoSelector = renderItem => {
-    return renderItem.map((item, index) => <li key={item.fileName} data-value={index} />)
+    return renderItem.map((item, index) => (
+      <li
+        key={item.fileName}
+        className={index === activeDot ? style.active : null}
+        data-value={index}
+      />
+    ))
   }
 
-  const [displayInBlock, setDisplayInBlock] = useState([])
-  const handleClick = e => {
-    if (e.target.nodeName !== 'LI') return
-    const chosenNum = e.target.dataset.value
-    if (chosenNum === 0) {
-      setDisplayInBlock('first')
-    } else if (chosenNum === 1) {
-      setDisplayInBlock('second')
-    } else {
-      setDisplayInBlock('third')
-    }
+  const renderClass = groups => {
+    return groups === '汪汪組' ? 'dogs' : 'cats'
   }
 
   const checkObjectStatus = checkedItem => {
@@ -38,9 +50,9 @@ export default function Swiper({ photoGroup = [] }) {
   }
 
   return (
-    <div className={style.swiperWrap}>
+    <div className={`${style.swiperWrap} ${style[renderClass(groups)]}`}>
       <div className={`${style.imgContainer} flex items-center justify-center`}>
-        <div className={`${style.imgWrap} ${style[displayInBlock]} flex `}>
+        <div className={`${style.imgWrap} ${style[displayPhoto]} flex `}>
           {renderPhoto(renderGroup)}
         </div>
       </div>

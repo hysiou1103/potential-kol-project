@@ -67,7 +67,7 @@ export default function VotingActive() {
             目前總投票數：<strong>{totalVotes}</strong>票
           </div>
           <img src={competitiveSituation} alt="Competitive Situation" />
-          <section className={`${style.takeLeadSection} flex justify-center`}>
+          <section className={`${style.takeLeadSection} flex justify-center items-center`}>
             {takeLeadGroup.map(competitor => (
               <TakeLeadCard key={competitor.id} competitor={competitor} />
             ))}
