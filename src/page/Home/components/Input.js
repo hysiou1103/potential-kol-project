@@ -25,7 +25,6 @@ export default function Input({ name = '', type = '', width = '', placeholder = 
     }
 
     //Pattern
-
     const pattern = verifiedItem.pattern
     if (processVal && pattern && !pattern.RegExp.test(processVal)) {
       passRegExp = false

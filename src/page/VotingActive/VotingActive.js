@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import CountDown from './components/CountDown'
 import TakeLeadCard from './components/TakeLeadCard'
 import VotingCard from './components/VotingCard'
 import { groups } from 'config'
@@ -42,11 +43,12 @@ export default function VotingActive() {
 
   const [chosenGroup, setChosenGroup] = useState('ALL')
   const handleGroupsClick = e => {
-    if (e.target.nodeName !== 'LI') return
-    let newGroup = e.target.innerText
-    setChosenGroup(newGroup)
-    setSearchKeyword('')
-    composeRenderList(newGroup, 'groups')
+    if (e.target.nodeName == 'LI') {
+      let newGroup = e.target.innerText
+      setChosenGroup(newGroup)
+      setSearchKeyword('')
+      composeRenderList(newGroup, 'groups')
+    }
   }
 
   const [renderList, setRenderList] = useState([...reorderList])
@@ -57,7 +59,6 @@ export default function VotingActive() {
       : (tempList = reorderList.filter(item => item[filterTarget].includes(filterText)))
     setRenderList(tempList)
   }
-
   const totalVotes = reorderList.reduce((acc, cur) => acc + cur.votes, 0)
   return (
     <>
@@ -67,6 +68,8 @@ export default function VotingActive() {
             目前總投票數：<strong>{totalVotes}</strong>票
           </div>
           <img src={competitiveSituation} alt="Competitive Situation" />
+          <CountDown />
+
           <section className={`${style.takeLeadSection} flex justify-center items-center`}>
             {takeLeadGroup.map(competitor => (
               <TakeLeadCard key={competitor.id} competitor={competitor} />

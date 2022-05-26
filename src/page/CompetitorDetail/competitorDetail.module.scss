@@ -1,13 +1,5 @@
 @import 'styles/helpers/_mixin.scss';
 
-main {
-  padding: 15px;
-  min-height: 100vh;
-
-  @include ipad {
-    padding-top: 30px;
-  }
-}
 
 .competitorDetailWrap {
   padding: 15px;
@@ -20,9 +12,6 @@ main {
     flex-wrap: nowrap;
     padding: 50px;
   }
-
-  @include ipad {}
-
 }
 
 .competitorContent {
@@ -32,7 +21,6 @@ main {
 
 
 .dogs {
-
   @include ipad {
     width: 50%
   }
@@ -85,16 +73,11 @@ main {
 .tagWrap {
   display: inline-flex;
   justify-content: flex-end;
-  flex-direction: row-reverse;
   width: calc(100% - 141px);
 
   @include ipad {
     width: 100%;
   }
-}
-
-.groupTag {
-  margin-left: auto;
 }
 
 .competitorHeader {
@@ -214,7 +197,7 @@ main {
 
     @include ipad {
       display: flex;
-      margin-top: 30px;
+      margin-top: 50px;
     }
   }
 

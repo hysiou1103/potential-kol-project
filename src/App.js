@@ -1,6 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import React, { useEffect } from 'react'
-
 import Home from './page/Home/Home'
 import CompetitorDetail from './page/CompetitorDetail/CompetitorDetail'
 import Form from './page/Home/components/Form'
@@ -23,9 +22,9 @@ function App() {
         <Route path="/" element={<Home />}>
           <Route index element={<Form />} />
           <Route path="votingActive" element={<VotingActive />} />
-        </Route>
-        <Route path="competitorDetail">
-          <Route path=":competitorId" element={<CompetitorDetail />} />
+          <Route path="competitorDetail">
+            <Route path=":competitorId" element={<CompetitorDetail />} />
+          </Route>
         </Route>
       </Routes>
       <PhoneNav />

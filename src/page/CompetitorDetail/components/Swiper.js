@@ -12,30 +12,32 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
     }
   }, [photoGroup])
 
-  const [displayPhoto, setDisplayPhoto] = useState('first')
-  const [activeDot, setActiveDot] = useState(0)
+  const [activePhoto, setActivePhoto] = useState(0)
   const handleClick = e => {
-    if (e.target.nodeName !== 'LI') return
-    const chosenNum = parseInt(e.target.dataset.value)
-    setActiveDot(chosenNum)
-    if (chosenNum === 0) {
-      setDisplayPhoto('first')
-    } else if (chosenNum === 1) {
-      setDisplayPhoto('second')
-    } else {
-      setDisplayPhoto('third')
+    if (e.target.nodeName == 'LI') {
+      const chosenNum = parseInt(e.target.dataset.value)
+      setActivePhoto(chosenNum)
     }
   }
 
   const renderPhoto = renderItem => {
-    return renderItem.map(item => <img key={item.fileName} src={item.src} />)
+    return renderItem.map((item, index) => (
+      <img
+        className={`absolute z-1 
+          ${style.overlapImg} 
+          ${index === activePhoto ? style.active : null}
+        `}
+        key={item.fileName}
+        src={item.src}
+      />
+    ))
   }
 
   const renderPhotoSelector = renderItem => {
     return renderItem.map((item, index) => (
       <li
         key={item.fileName}
-        className={index === activeDot ? style.active : null}
+        className={index === activePhoto ? style.active : null}
         data-value={index}
       />
     ))
@@ -50,13 +52,9 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
   }
 
   return (
-    <div className={`${style.swiperWrap} ${style[renderClass(groups)]}`}>
-      <div className={`${style.imgContainer} flex items-center justify-center`}>
-        <div className={`${style.imgWrap} ${style[displayPhoto]} flex `}>
-          {renderPhoto(renderGroup)}
-        </div>
-      </div>
-      <ul className={`${style.selectDot} flex justify-center`} onClick={handleClick}>
+    <div className={`${style.swiperWrap} ${style[renderClass(groups)]} w-full relative z-0`}>
+      <div className={`${style.imgWrap} relative z-0`}>{renderPhoto(renderGroup)}</div>
+      <ul className={`${style.selectDot} flex justify-center absolute z-1`} onClick={handleClick}>
         {renderPhotoSelector(renderGroup)}
       </ul>
     </div>

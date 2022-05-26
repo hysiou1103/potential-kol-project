@@ -14,27 +14,31 @@ export default function CompetitorDetail() {
   const { groups, competitionID, id, selfIntro, votes, photo1, photo2, photo3 } = competitorData
 
   useEffect(() => {
-    const votingList = JSON.parse(localStorage.getItem('registInfor')) || []
     const votingCounts = JSON.parse(localStorage.getItem('counterRecord')) || {}
-    const data = votingList.filter(item => item.id === parseInt(competitorId))
     if (votingCounts[today]) {
       const counts = parseInt(votingCounts[today].voting)
       setCounter(counts)
     }
+    const votingList = JSON.parse(localStorage.getItem('registInfor')) || []
+    const data = votingList.filter(item => item.id === parseInt(competitorId))
     setListInBrowser([...votingList])
     setCompetitorData(...data)
   }, [])
 
   const [clickAnimation, setClickAnimation] = useState(false)
   const handleVotes = () => {
-    if (counter === 2) return
-    const { votes } = competitorData
-    const tempData = { ...competitorData, votes: votes + 1 }
-    const tempCounter = counter + 1
-    setCounter(tempCounter)
-    setCompetitorData(tempData)
-    setClickAnimation(!clickAnimation)
-    updateList(tempData, tempCounter)
+    const dailyVotingLimit = 2
+    if (counter < dailyVotingLimit) {
+      const { votes } = competitorData
+      const tempData = { ...competitorData, votes: votes + 1 }
+      setCompetitorData(tempData)
+
+      const tempCounter = counter + 1
+      setCounter(tempCounter)
+
+      setClickAnimation(!clickAnimation)
+      updateStorage(tempData, tempCounter)
+    }
   }
 
   useEffect(() => {
@@ -43,12 +47,13 @@ export default function CompetitorDetail() {
     }, 300)
   }, [clickAnimation])
 
-  const updateList = (tempData, tempCounter) => {
+  const updateStorage = (tempData, tempCounter) => {
     const tempList = [...listInBrowser]
     tempList.splice(tempData.id - 1, 1, tempData)
     setListInBrowser(tempList)
     localStorage.removeItem('registInfor')
     localStorage.setItem('registInfor', JSON.stringify(tempList))
+
     const tempRecord = {
       [today]: {
         voting: tempCounter
@@ -66,10 +71,10 @@ export default function CompetitorDetail() {
   const today = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}`
 
   return (
-    <main>
-      <div className={`${style.competitorDetailWrap}  container flex`}>
+    <section className="w-full">
+      <div className={`${style.competitorDetailWrap} flex justify-center`}>
         <Swiper photoGroup={[photo1, photo2, photo3]} groups={groups} />
-        <section className={`w-full ${style[renderClass(competitorData)]} `}>
+        <div className={`w-full ${style[renderClass(competitorData)]}`}>
           <Link
             to="/votingActive"
             className={`${style.goBackBtn} ${style.phone} justify-center items-center`}
@@ -80,10 +85,10 @@ export default function CompetitorDetail() {
           <div className={style.tagWrap}>
             <div className={style.groupTag}>{groups}</div>
           </div>
-          <div className={`${style.competitorContent} h-full flex flex-col`}>
+          <div className={`${style.competitorContent} h-full flex flex-col justify-around`}>
             <div className={style.competitorHeader}>
-              <div className={style.competitonID}>{competitionID}</div>
-              <div className={style.competitorOrder}>NO.{id}</div>
+              <p className={style.competitonID}>{competitionID}</p>
+              <p className={style.competitorOrder}>NO.{id}</p>
             </div>
             <div className={style.introSection}>
               <p className={style.introTitle}>介紹</p>
@@ -100,11 +105,11 @@ export default function CompetitorDetail() {
             >
               投我一票
             </button>
-            <p className={style.reminderText}>
+            <div className={style.reminderText}>
               不限次數分享，分享1次加1票，最多加<strong>2</strong>票
-            </p>
+            </div>
           </div>
-        </section>
+        </div>
       </div>
       <Link
         to="/votingActive"
@@ -113,6 +118,6 @@ export default function CompetitorDetail() {
         <img src={goBack} alt="Go Back arrow" width="24" height="24" />
         <span>返回列表</span>
       </Link>
-    </main>
+    </section>
   )
 }

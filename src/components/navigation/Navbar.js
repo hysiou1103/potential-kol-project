@@ -8,7 +8,7 @@ import style from './navbar.module.scss'
 export default function Navbar() {
   return (
     <header>
-      <div className="container flex justify-between items-center ">
+      <div className={` ${style.navbarWrap} container flex justify-between items-center`}>
         <Link to="/" title="ETmall" className="logo">
           <img src={Logo} alt="ETmall" width="115" height="40" />
         </Link>

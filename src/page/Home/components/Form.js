@@ -31,7 +31,7 @@ export default function Form() {
 
   return (
     <FormContext.Provider value={{ state, dispatch }}>
-      <img src={signUpForm} alt="Sign Up Form" />
+      <img src={signUpForm} className={style.signUpImg} alt="Sign Up Form" />
       <main className={`${style.formWrap} w-full`}>
         <div className={`${style.inputGroup} flex`}>
           <label className="flex items-center" htmlFor="name">
