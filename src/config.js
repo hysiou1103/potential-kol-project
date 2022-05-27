@@ -490,17 +490,121 @@ export const cityList = [
   }
 ]
 
-export const requiredItem = [
-  'name',
-  'email',
-  'phone',
-  'groups',
-  'competitionID',
-  'selfIntro',
-  'years',
-  'months',
-  'days',
-  'district',
-  'detailAddress',
-  'photo1'
-]
+export const executeValidateField = ({ fieldName, fieldValue }) => {
+  const validations = {
+    name: {
+      required: true,
+      pattern: {
+        RegExp: /^[a-zA-z\u4e00-\u9ffa5,.'-]{2,}$/i,
+        message: '請輸入正確姓名'
+      }
+    },
+    email: {
+      required: true,
+      pattern: {
+        RegExp:
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        message: '請輸入正確信箱',
+        clearInvalidInput: ''
+      },
+      encryption: {
+        value: true,
+        excryFn: inputValue => {
+          const accountArr = inputValue.split('@')[0].split('')
+          const suffix = inputValue.split('@')[1]
+          accountArr.forEach((item, index, arr) => {
+            index % 2 === 1 ? (arr[index] = '*') : (arr[index] = item)
+          })
+          const encrypVal = `${accountArr.join('')}@${suffix}`
+          return encrypVal
+        }
+      }
+    },
+    phone: {
+      required: true,
+      pattern: {
+        RegExp: /(\w{2,3}-?|\(\w{2,3}\))\w{3,4}-?\w{4}|09\w{2}(\w{6}|-\w{3}-\w{3})/,
+        message: '請輸入正確電話號碼',
+        clearInvalidInput: ''
+      }
+    },
+    competitionID: {
+      required: true,
+      pattern: {
+        RegExp: /^[A-Za-z\u4e00-\u9fa5]{1,20}$/,
+        message: '不可輸入特殊符號',
+        clearInvalidInput: ''
+      }
+    },
+    selfIntro: {
+      required: true
+    },
+    detailAddress: {
+      required: true
+    },
+    privacy: {
+      required: true
+    },
+    portrait: {
+      required: true
+    }
+  }
+
+  let errMsg = ''
+  let encryptVal = ''
+  const verifiedItem = validations[fieldName]
+  if (verifiedItem) {
+    //required
+    if (verifiedItem.required && !fieldValue) {
+      errMsg = '此欄位為必填項目'
+    }
+    //Pattern
+    let passRegExp = true
+    const pattern = verifiedItem.pattern
+    if (fieldValue && pattern && !pattern.RegExp.test(fieldValue)) {
+      passRegExp = false
+      errMsg = pattern.message
+      fieldValue = ''
+    }
+
+    //Encryption
+    if (fieldValue && passRegExp && verifiedItem.encryption) {
+      encryptVal = verifiedItem.encryption.excryFn(fieldValue)
+    }
+  }
+  return { errMsg, encryptVal, fieldValue }
+}
+
+export const validController = objectToBeTested => {
+  const requiredFormItem = [
+    'name',
+    'email',
+    'phone',
+    'groups',
+    'competitionID',
+    'selfIntro',
+    'years',
+    'months',
+    'days',
+    'district',
+    'detailAddress',
+    'photo1',
+    'privacy',
+    'portrait'
+  ]
+  let completeStatus = false
+  try {
+    requiredFormItem.forEach(item => {
+      if (
+        !objectToBeTested[item].value ||
+        Object.values(objectToBeTested[item].value).some(value => value === '')
+      ) {
+        throw false
+      }
+      completeStatus = true
+    })
+  } catch (err) {
+    completeStatus = err
+  }
+  return completeStatus
+}

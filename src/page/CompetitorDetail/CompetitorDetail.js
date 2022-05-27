@@ -105,9 +105,9 @@ export default function CompetitorDetail() {
             >
               投我一票
             </button>
-            <div className={style.reminderText}>
+            <p className={style.reminderText}>
               不限次數分享，分享1次加1票，最多加<strong>2</strong>票
-            </div>
+            </p>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { FormContext } from './Form'
 import { groups, years, months, days, cityList } from 'config'
 import style from './selector.module.scss'
@@ -6,14 +6,12 @@ import style from './selector.module.scss'
 export default function Selector({ name = '', width = '' }) {
   const { state, dispatch } = useContext(FormContext)
   const { signUpData = {} } = state
-  const [selectedVal, setSelectedVal] = useState('default')
   const handleChange = e => {
-    setSelectedVal(e.target.value)
     dispatch({
-      type: 'CREATE_SIGNUPDATA',
+      type: 'SAVING_FIELD_DATA',
       payload: {
-        dataKey: name,
-        dataValue: e.target.value
+        fieldName: name,
+        fieldValue: e.target.value.trim()
       }
     })
   }
@@ -33,7 +31,7 @@ export default function Selector({ name = '', width = '' }) {
       case 'city':
         return commonOptionRender('請選擇縣市', cityArr)
       case 'district':
-        return districtOptionRender('請選擇鄉鎮', signUpData.city)
+        return districtOptionRender('請選擇鄉鎮', signUpData.city.value)
       default:
         break
     }
@@ -42,7 +40,7 @@ export default function Selector({ name = '', width = '' }) {
   return (
     <select
       id={name}
-      value={selectedVal}
+      value={signUpData[name].value}
       onChange={handleChange}
       className={style[updateClassName(width)]}
     >

@@ -5,20 +5,22 @@ import style from './modal.module.scss'
 export default function Modal() {
   const { state, dispatch } = useContext(FormContext)
   const { openModal = false, signUpData = {}, photoIndex = 'photo1' } = state
+  const photoPosition = signUpData[photoIndex]
 
   useEffect(() => {
-    signUpData[photoIndex] &&
-      signUpData[photoIndex].src &&
+    photoPosition &&
+      photoPosition.src &&
       setPhotoObj({
-        src: signUpData[photoIndex].src,
-        fileName: signUpData[photoIndex].fileName
+        src: photoPosition.value.src,
+        fileName: photoPosition.value.fileName
       })
-  }, [signUpData])
+  }, [])
 
   const [photoObj, setPhotoObj] = useState({
     src: '',
     fileName: '上傳檔案'
   })
+
   const imgUpload = useRef()
   const handleChange = () => {
     if (imgUpload.current.files && imgUpload.current.files[0]) {
@@ -44,10 +46,10 @@ export default function Modal() {
       return
     }
     dispatch({
-      type: 'CREATE_SIGNUPDATA',
+      type: 'SAVING_FIELD_DATA',
       payload: {
-        dataKey: photoIndex,
-        dataValue: photoObj
+        fieldName: photoIndex,
+        fieldValue: photoObj
       }
     })
   }

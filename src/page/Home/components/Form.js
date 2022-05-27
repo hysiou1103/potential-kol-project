@@ -4,35 +4,44 @@ import Input from './Input'
 import Selector from './Selector'
 import UploadPhotoSection from './UploadPhotoSection'
 import Modal from './Modal'
-import { requiredItem } from 'config'
+import { executeValidateField, validController } from 'config'
 import signUpForm from 'imgs/signUpForm.png'
 import style from './form.module.scss'
 
 export default function Form() {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const { privacy, portrait, reject, signUpData, photoIndex } = state
+  const { signUpData, photoIndex, isValid } = state
 
   useEffect(() => {
-    dispatch({ type: 'CHANGE_REJECT' })
-  }, [signUpData, privacy, portrait])
+    dispatch({ type: 'UPDATE_ISVALID' })
+  }, [signUpData])
 
   const navigate = useNavigate()
-  const saveListInBrowser = () => {
-    if (reject) return
-    const { years, months, days, city, ...tempStorageData } = signUpData
-    const birthday = `${years}/${months}/${days}`
-    const storageList = JSON.parse(localStorage.getItem('registInfor')) || []
-    tempStorageData.birthday = birthday
-    tempStorageData.id = storageList.length + 1
-    storageList.push(tempStorageData)
-    localStorage.setItem('registInfor', JSON.stringify(storageList))
-    navigate(`/votingActive`)
+  const saveListInBrowser = e => {
+    e.preventDefault()
+    if (isValid) {
+      const { years, months, days, city, ...otherItems } = signUpData
+      const birthday = `${years.value}/${months.value}/${days.value}`
+      const storageList = JSON.parse(localStorage.getItem('registInfor')) || []
+      const tempStorageKey = Object.keys(otherItems)
+      let tempStorageData = {}
+      tempStorageKey.forEach(item => {
+        tempStorageData = { ...tempStorageData, [item]: otherItems[item].value }
+      })
+
+      tempStorageData.birthday = birthday
+      tempStorageData.id = storageList.length + 1
+
+      storageList.push(tempStorageData)
+      localStorage.setItem('registInfor', JSON.stringify(storageList))
+      navigate(`/votingActive`)
+    }
   }
 
   return (
     <FormContext.Provider value={{ state, dispatch }}>
       <img src={signUpForm} className={style.signUpImg} alt="Sign Up Form" />
-      <main className={`${style.formWrap} w-full`}>
+      <form className={`${style.formWrap} w-full`} onSubmit={saveListInBrowser}>
         <div className={`${style.inputGroup} flex`}>
           <label className="flex items-center" htmlFor="name">
             姓名
@@ -130,10 +139,12 @@ export default function Form() {
             <input
               type="checkbox"
               id="privacyPolicy"
-              value="privacy"
-              checked={privacy}
+              checked={signUpData.privacy.value}
               onChange={() => {
-                dispatch({ type: 'CHANGE_PRIVACY' })
+                dispatch({
+                  type: 'SAVING_FIELD_DATA',
+                  payload: { fieldName: 'privacy', fieldValue: !signUpData.privacy.value }
+                })
               }}
             />
             <label htmlFor="privacyPolicy">
@@ -145,10 +156,12 @@ export default function Form() {
             <input
               type="checkbox"
               id="portraitRights"
-              value="portrait"
-              checked={portrait}
+              checked={signUpData.portrait.value}
               onChange={() => {
-                dispatch({ type: 'CHANGE_PORTRAIT' })
+                dispatch({
+                  type: 'SAVING_FIELD_DATA',
+                  payload: { fieldName: 'portrait', fieldValue: !signUpData.portrait.value }
+                })
               }}
             />
             <label htmlFor="portraitRights">
@@ -157,92 +170,80 @@ export default function Form() {
             </label>
           </div>
         </div>
-        <button
-          className={`${style.formBtn} ${reject ? style.disabled : ''}`}
-          onClick={saveListInBrowser}
-        >
-          送出報名
-        </button>
+        <button className={`${style.formBtn} ${!isValid ? style.disabled : ''}`}>送出報名</button>
         <Modal key={photoIndex} />
-      </main>
+      </form>
     </FormContext.Provider>
   )
 }
 
 const reducer = (state, action) => {
-  const { privacy, portrait, signUpData, openModal } = state
+  const { signUpData, openModal } = state
+  let tempData = { ...signUpData }
   switch (action.type) {
-    case 'CHANGE_PRIVACY':
-      return { ...state, privacy: !privacy }
-    case 'CHANGE_PORTRAIT':
-      return { ...state, portrait: !portrait }
-    case 'CHANGE_REJECT':
-      let complete = false
-      let status = true
-      try {
-        requiredItem.forEach(item => {
-          if (
-            signUpData[item] === '' ||
-            Object.values(signUpData[item]).some(value => value === '')
-          ) {
-            throw false
-          }
-          complete = true
-        })
-      } catch (status) {
-        complete = status
-      }
-      if (complete && privacy && portrait) {
-        status = false
-      }
-      return { ...state, reject: status }
-    case 'CREATE_SIGNUPDATA':
-      const tempData = { ...signUpData }
-      tempData[action.payload.dataKey] = action.payload.dataValue
-      return { ...state, signUpData: { ...tempData } }
     case 'UPDATE_PHOTOINDEX':
-      return { ...state, photoIndex: action.payload, openModal: !openModal }
+      return { ...state, photoIndex: action.payload }
+    case 'UPDATE_ISVALID':
+      const result = validController(signUpData)
+      return { ...state, isValid: result }
     case 'CHANGE_MODAL_MODE':
       return { ...state, openModal: !openModal }
+    case 'SAVING_FIELD_DATA':
+      const { errMsg, encryptVal, fieldValue } = executeValidateField(action.payload, signUpData)
+      tempData = { ...signUpData }
+      tempData[action.payload.fieldName].value = fieldValue
+      tempData[action.payload.fieldName].error = errMsg
+      if (encryptVal) {
+        tempData[action.payload.fieldName].encryptValue = encryptVal
+      }
+      return { ...state, signUpData: { ...tempData } }
     default:
       return state
   }
 }
 
 const initialState = {
-  privacy: false,
-  portrait: false,
-  reject: true,
   openModal: false,
   photoIndex: 'photo1',
-  rejectBtnClassName: '',
+  isValid: false,
   signUpData: {
-    name: '',
-    email: '',
-    phone: '',
-    groups: '',
-    competitionID: '',
-    selfIntro: '',
-    years: '',
-    months: '',
-    days: '',
-    city: '',
-    district: '',
-    detailAddress: '',
-    birthday: '',
-    votes: 0,
+    name: { value: '', error: '' },
+    email: { value: '', error: '', encryptValue: '' },
+    phone: { value: '', error: '' },
+    groups: { value: 'default', error: '' },
+    competitionID: { value: '', error: '' },
+    selfIntro: { value: '', error: '' },
+    years: { value: 'default', error: '' },
+    months: { value: 'default', error: '' },
+    days: { value: 'default', error: '' },
+    city: { value: 'default', error: '' },
+    district: { value: 'default', error: '' },
+    detailAddress: { value: '', error: '' },
     photo1: {
-      src: '',
-      fileName: ''
+      value: {
+        src: '',
+        fileName: '上傳檔案'
+      },
+      error: ''
     },
     photo2: {
-      src: '',
-      fileName: ''
+      value: {
+        src: '',
+        fileName: '上傳檔案'
+      },
+      error: ''
     },
     photo3: {
-      src: '',
-      fileName: ''
-    }
+      value: {
+        src: '',
+        fileName: '上傳檔案'
+      },
+      error: ''
+    },
+    birthday: '',
+    votes: 0,
+    privacy: { value: false, error: '' },
+    portrait: { value: false, error: '' }
   }
 }
 
