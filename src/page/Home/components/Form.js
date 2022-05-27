@@ -31,6 +31,7 @@ export default function Form() {
 
       tempStorageData.birthday = birthday
       tempStorageData.id = storageList.length + 1
+      tempStorageData.votes = 0
 
       storageList.push(tempStorageData)
       localStorage.setItem('registInfor', JSON.stringify(storageList))
