@@ -26,12 +26,11 @@ export default function Form() {
       const tempStorageKey = Object.keys(otherItems)
       let tempStorageData = {}
       tempStorageKey.forEach(item => {
-        tempStorageData = { ...tempStorageData, [item]: otherItems[item].value }
+        tempStorageData = { ...tempStorageData, [item]: otherItems[item].value || otherItems[item] }
       })
 
       tempStorageData.birthday = birthday
       tempStorageData.id = storageList.length + 1
-      tempStorageData.votes = 0
 
       storageList.push(tempStorageData)
       localStorage.setItem('registInfor', JSON.stringify(storageList))
@@ -190,10 +189,10 @@ const reducer = (state, action) => {
     case 'CHANGE_MODAL_MODE':
       return { ...state, openModal: !openModal }
     case 'SAVING_FIELD_DATA':
-      const { errMsg, encryptVal, fieldValue } = executeValidateField(action.payload, signUpData)
+      const { errMsg, encryptVal } = executeValidateField(action.payload)
       tempData = { ...signUpData }
-      tempData[action.payload.fieldName].value = fieldValue
       tempData[action.payload.fieldName].error = errMsg
+      tempData[action.payload.fieldName].value = action.payload.fieldValue
       if (encryptVal) {
         tempData[action.payload.fieldName].encryptValue = encryptVal
       }

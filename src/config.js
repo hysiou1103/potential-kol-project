@@ -564,7 +564,6 @@ export const executeValidateField = ({ fieldName, fieldValue }) => {
     if (fieldValue && pattern && !pattern.RegExp.test(fieldValue)) {
       passRegExp = false
       errMsg = pattern.message
-      fieldValue = ''
     }
 
     //Encryption
@@ -572,7 +571,7 @@ export const executeValidateField = ({ fieldName, fieldValue }) => {
       encryptVal = verifiedItem.encryption.excryFn(fieldValue)
     }
   }
-  return { errMsg, encryptVal, fieldValue }
+  return { errMsg, encryptVal }
 }
 
 export const validController = objectToBeTested => {
@@ -597,7 +596,8 @@ export const validController = objectToBeTested => {
     requiredFormItem.forEach(item => {
       if (
         !objectToBeTested[item].value ||
-        Object.values(objectToBeTested[item].value).some(value => value === '')
+        Object.values(objectToBeTested[item].value).some(value => value === '') ||
+        objectToBeTested[item].errMsg
       ) {
         throw false
       }
