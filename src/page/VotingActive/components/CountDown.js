@@ -4,7 +4,7 @@ import style from './countDown.module.scss'
 export default function CountDown() {
   const [countDown, setCountDown] = useState(0)
   useEffect(() => {
-    const dueDate = new Date('2022/5/30 18:00:00').getTime()
+    const dueDate = new Date('2022/6/5 18:00:00').getTime()
     const interval = setInterval(() => {
       setCountDown(dueDate - new Date().getTime())
     }, 1000)
@@ -17,10 +17,10 @@ export default function CountDown() {
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
   const getFormatDate = restTime => {
-    const days = Math.floor(restTime / (60 * 60 * 24 * 1000))
-    const hours = Math.floor((restTime % (60 * 60 * 24 * 1000)) / (1000 * 60 * 60))
-    const minutes = Math.floor((restTime % (60 * 60 * 1000)) / (1000 * 60))
-    const seconds = Math.floor((restTime % (60 * 1000)) / 1000)
+    const days = Math.floor(restTime / 86400000) //至到期日前剩餘毫秒轉為秒數後換算成天數(60*60*24*1000)
+    const hours = Math.floor((restTime % 86400000) / 3600000) //至到期日前不足以成為一日之剩餘毫秒數換算成小時數(60*60*1000)
+    const minutes = Math.floor((restTime % 3600000) / 60000) //至到期日前不足以成為一小時之剩餘毫秒數換算成分鐘數(60*1000)
+    const seconds = Math.floor((restTime % 60000) / 1000) //至到期日前不足以成為一分鐘之剩餘毫秒數換算成秒數
     setDays(days)
     setHours(hours)
     setMinutes(minutes)

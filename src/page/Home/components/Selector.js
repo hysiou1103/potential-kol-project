@@ -38,23 +38,21 @@ export default function Selector({ name = '', width = '' }) {
   }
 
   return (
-    <select
-      id={name}
-      value={signUpData[name].value}
-      onChange={handleChange}
-      className={style[updateClassName(width)]}
-    >
-      {createOption()}
-    </select>
+    <div className={`flex flex-col ${width && style[updateClassName(width)]}`}>
+      <select id={name} value={signUpData[name].value} onChange={handleChange}>
+        {createOption()}
+      </select>
+      {signUpData[name].error && <p className="errMsg"> {signUpData[name].error}</p>}
+    </div>
   )
 }
 
 const updateClassName = width => {
   let result = ''
   if (width === '1/3') {
-    result = 'oneThird'
+    result = 'oneThirdSelector'
   } else if (width === '1/2') {
-    result = 'oneHalf'
+    result = 'oneHalfSelector'
   }
   return result
 }

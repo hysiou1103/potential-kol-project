@@ -14,10 +14,10 @@ export default function TakeLeadCard({ competitor = {} }) {
       className={`${style.leadCardWrap} relative z-0`}
     >
       <div className={`${style.crownWrap} absolute z-1`}>
-        <img src={crownIcon} alt="Crown Icon" />
+        <img src={crownIcon} alt="Crown Icon" width="60" height="60" />
       </div>
       <div className={style.leadCardImg}>
-        <img src={competitor.photo1.src} alt="competitor" />
+        <img src={competitor.photo1.src} alt="competitor" width={500} height={500} />
       </div>
       <p className={`${style.eachGroup} ${style[updateClass(competitor)]}`}>{competitor.groups}</p>
       <div className={style.leadInfor}>

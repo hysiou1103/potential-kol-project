@@ -6,13 +6,13 @@ import style from './uploadPhotoSection.module.scss'
 export default function UploadPhotoSection({ placeHolder = {} }) {
   const { state, dispatch } = useContext(FormContext)
   const { signUpData = {} } = state
-  const keyName = placeHolder.value
+  const name = placeHolder.value
   return (
     <>
       <label className="flex items-center">上傳{placeHolder.label}</label>
       <div className={style.uploadWrap}>
         <button
-          className={style.uploadBtn}
+          className={`${style.uploadBtn} flex justify-center items-center`}
           onClick={() => {
             dispatch({
               type: 'UPDATE_PHOTOINDEX',
@@ -27,7 +27,10 @@ export default function UploadPhotoSection({ placeHolder = {} }) {
           <span>選擇檔案</span>
         </button>
         <div className={style.fileInfor}>
-          <p>{signUpData[keyName].value.fileName ? signUpData[keyName].value.fileName : null}</p>
+          <div className="flex items-center">
+            <p>{signUpData[name].value.fileName ? signUpData[name].value.fileName : null}</p>
+            {signUpData[name].error && <span className="errMsg"> {signUpData[name].error}</span>}
+          </div>
           <p>檔案大小不得超過5MB，建議尺寸為正方形(最少1張、最多3張)</p>
         </div>
       </div>

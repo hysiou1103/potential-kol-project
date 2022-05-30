@@ -4,7 +4,7 @@ import Input from './Input'
 import Selector from './Selector'
 import UploadPhotoSection from './UploadPhotoSection'
 import Modal from './Modal'
-import { executeValidateField, validController } from 'config'
+import { executeValidationsOfInput, validController } from 'config'
 import signUpForm from 'imgs/signUpForm.png'
 import style from './form.module.scss'
 
@@ -12,13 +12,13 @@ export default function Form() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { signUpData, photoIndex, isValid } = state
 
-  useEffect(() => {
-    dispatch({ type: 'UPDATE_ISVALID' })
-  }, [signUpData])
-
   const navigate = useNavigate()
-  const saveListInBrowser = e => {
+  const checkForm = e => {
     e.preventDefault()
+    dispatch({ type: 'UPDATE_ISVALID' })
+  }
+
+  useEffect(() => {
     if (isValid) {
       const { years, months, days, city, ...otherItems } = signUpData
       const birthday = `${years.value}/${months.value}/${days.value}`
@@ -28,20 +28,18 @@ export default function Form() {
       tempStorageKey.forEach(item => {
         tempStorageData = { ...tempStorageData, [item]: otherItems[item].value || otherItems[item] }
       })
-
       tempStorageData.birthday = birthday
       tempStorageData.id = storageList.length + 1
-
       storageList.push(tempStorageData)
       localStorage.setItem('registInfor', JSON.stringify(storageList))
       navigate(`/votingActive`)
     }
-  }
+  }, [isValid])
 
   return (
     <FormContext.Provider value={{ state, dispatch }}>
       <img src={signUpForm} className={style.signUpImg} alt="Sign Up Form" />
-      <form className={`${style.formWrap} w-full`} onSubmit={saveListInBrowser}>
+      <form className={`${style.formWrap} w-full`} onSubmit={checkForm}>
         <div className={`${style.inputGroup} flex`}>
           <label className="flex items-center" htmlFor="name">
             姓名
@@ -70,7 +68,7 @@ export default function Form() {
           <label className="flex items-center" htmlFor="group">
             報名組別
           </label>
-          <div className={`${style.selectWrap} flex`}>
+          <div className={`${style.selectWrap}`}>
             <Selector name="groups" />
           </div>
         </div>
@@ -170,7 +168,7 @@ export default function Form() {
             </label>
           </div>
         </div>
-        <button className={`${style.formBtn} ${!isValid ? style.disabled : ''}`}>送出報名</button>
+        <button className={`${style.formBtn}`}>送出報名</button>
         <Modal key={photoIndex} />
       </form>
     </FormContext.Provider>
@@ -184,18 +182,21 @@ const reducer = (state, action) => {
     case 'UPDATE_PHOTOINDEX':
       return { ...state, photoIndex: action.payload }
     case 'UPDATE_ISVALID':
-      const result = validController(signUpData)
-      return { ...state, isValid: result }
+      const { isValid, objectToBeTested } = validController(signUpData)
+      return { ...state, isValid: isValid, signUpData: { ...objectToBeTested } }
     case 'CHANGE_MODAL_MODE':
       return { ...state, openModal: !openModal }
     case 'SAVING_FIELD_DATA':
-      const { errMsg, encryptVal } = executeValidateField(action.payload)
+      const { errMsg, encryptVal, hasError } = executeValidationsOfInput(action.payload)
       tempData = { ...signUpData }
       tempData[action.payload.fieldName].error = errMsg
+      tempData[action.payload.fieldName].hasError = hasError
       tempData[action.payload.fieldName].value = action.payload.fieldValue
+
       if (encryptVal) {
         tempData[action.payload.fieldName].encryptValue = encryptVal
       }
+
       return { ...state, signUpData: { ...tempData } }
     default:
       return state
@@ -207,43 +208,46 @@ const initialState = {
   photoIndex: 'photo1',
   isValid: false,
   signUpData: {
-    name: { value: '', error: '' },
-    email: { value: '', error: '', encryptValue: '' },
-    phone: { value: '', error: '' },
-    groups: { value: 'default', error: '' },
-    competitionID: { value: '', error: '' },
-    selfIntro: { value: '', error: '' },
-    years: { value: 'default', error: '' },
-    months: { value: 'default', error: '' },
-    days: { value: 'default', error: '' },
-    city: { value: 'default', error: '' },
-    district: { value: 'default', error: '' },
-    detailAddress: { value: '', error: '' },
+    name: { value: '', error: '', hasError: false },
+    email: { value: '', error: '', hasError: false, encryptValue: '' },
+    phone: { value: '', error: '', hasError: false },
+    groups: { value: 'default', error: '', hasError: false },
+    competitionID: { value: '', error: '', hasError: false },
+    selfIntro: { value: '', error: '', hasError: false },
+    years: { value: 'default', error: '', hasError: false },
+    months: { value: 'default', error: '', hasError: false },
+    days: { value: 'default', error: '', hasError: false },
+    city: { value: 'default', error: '', hasError: false },
+    district: { value: 'default', error: '', hasError: false },
+    detailAddress: { value: '', error: '', hasError: false },
     photo1: {
       value: {
         src: '',
         fileName: '上傳檔案'
       },
-      error: ''
+      error: '',
+      hasError: false
     },
     photo2: {
       value: {
         src: '',
         fileName: '上傳檔案'
       },
-      error: ''
+      error: '',
+      hasError: false
     },
     photo3: {
       value: {
         src: '',
         fileName: '上傳檔案'
       },
-      error: ''
+      error: '',
+      hasError: false
     },
+    privacy: { value: false, error: '', hasError: false },
+    portrait: { value: false, error: '', hasError: false },
     birthday: '',
-    votes: 0,
-    privacy: { value: false, error: '' },
-    portrait: { value: false, error: '' }
+    votes: 0
   }
 }
 

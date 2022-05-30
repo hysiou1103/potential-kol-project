@@ -11,7 +11,8 @@
 }
 
 .formSection {
-  padding: 0 15px;
+  padding-right: 15px;
+  padding-left: 15px;
 
   @include ipad {
     padding: 0;

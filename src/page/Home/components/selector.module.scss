@@ -11,17 +11,16 @@ select {
   &:focus {
     border: 2px solid rgba($primary, 0.4);
   }
+}
 
+.oneThirdSelector {
+  width: calc((100% - 20px) / 3);
+}
 
-  &.oneThird {
-    width: calc((100% - 20px) / 3);
-  }
+.oneHalfSelector {
+  width: calc((100% - 10px) / 2);
 
-  &.oneHalf {
-    width: calc((100% - 10px) / 2);
-
-    @include ipad {
-      width: calc((80% - 10px) / 2);
-    }
+  @include ipad {
+    width: calc((80% - 10px) / 2);
   }
 }

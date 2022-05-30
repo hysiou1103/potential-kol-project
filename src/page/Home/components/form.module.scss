@@ -31,7 +31,8 @@
 
   label {
     width: 100%;
-    padding: 8px 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
     border-radius: 30px;
     font-size: 1.6rem;
     font-weight: 900;
@@ -81,11 +82,13 @@
 }
 
 .policyAgreement {
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
   gap: 5px;
 
   @include ipad {
-    padding: 20px 10px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 }
 

@@ -6,7 +6,7 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
   useEffect(() => {
     if (checkObjectStatus(photoGroup)) {
       const validPhoto = photoGroup.filter(item => {
-        if (checkObjectStatus(item)) return item
+        return checkObjectStatus(item)
       })
       setRenderPhoto(validPhoto)
     }
@@ -14,7 +14,7 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
 
   const [activePhoto, setActivePhoto] = useState(0)
   const handleClick = e => {
-    if (e.target.nodeName == 'LI') {
+    if (e.target.nodeName === 'LI') {
       const chosenNum = parseInt(e.target.dataset.value)
       setActivePhoto(chosenNum)
     }
@@ -29,6 +29,9 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
         `}
         key={item.fileName}
         src={item.src}
+        alt="competitor"
+        width="415"
+        height="415"
       />
     ))
   }

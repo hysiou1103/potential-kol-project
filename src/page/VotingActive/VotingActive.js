@@ -76,7 +76,7 @@ export default function VotingActive() {
             ))}
           </section>
           <img src={votingSection} alt="voting section" />
-          <section className={style.votingSectionWrap}>
+          <section className={`${style.votingSectionWrap} w-full`}>
             <div className={`${style.searchingBar} flex justify-between`}>
               <div className={`${style.searchInputGroup} flex`}>
                 <input

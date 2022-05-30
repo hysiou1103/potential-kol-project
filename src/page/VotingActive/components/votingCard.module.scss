@@ -7,7 +7,6 @@
   background-color: white;
 
   @include ipad {
-    flex-wrap: nowrap;
     padding: 15px 30px;
   }
 }
@@ -42,6 +41,11 @@
 .votingIntro {
   flex-wrap: wrap;
   margin-left: 15px;
+  width: calc(100% - 132px);
+
+  @include ipad {
+    width: calc(100% - 150px);
+  }
 
   &.dogs {
     strong {
@@ -68,11 +72,6 @@
 
 .votingCardInfor {
   gap: 10px;
-  width: 100%;
-
-  @include ipad {
-    width: 247px;
-  }
 }
 
 .groupTag {
@@ -111,16 +110,13 @@
 .votingRelative {
   flex-wrap: wrap;
   gap: 10px;
-  width: 100%;
 
   @include ipad {
     justify-content: flex-end;
-    width: calc(100% - 247px)
   }
 
   .votes {
     font-size: 1.8rem;
-    width: 100%;
 
     strong {
       margin-left: 5px;
@@ -129,7 +125,6 @@
     }
 
     @include ipad {
-      width: 60%;
       justify-content: flex-end;
 
       strong {
@@ -150,8 +145,7 @@
     color: white;
 
     @include ipad {
-      width: 35%;
-
+      width: auto;
       font-size: 2.4rem;
     }
   }

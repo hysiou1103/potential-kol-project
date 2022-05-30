@@ -22,7 +22,8 @@ header {
   font-size: 1.6rem;
 
   nav a {
-    padding: 16px 10px 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.2);
@@ -30,6 +31,7 @@ header {
   }
 
   a {
-    padding: 0 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

@@ -19,7 +19,7 @@ export default function VotingCard({ competitor = {} }) {
       <div
         className={`${style.votingIntro} ${
           style[updateClass(competitor)]
-        } flex justify-between items-center w-full`}
+        } flex justify-between items-center`}
       >
         <div className={`${style.votingCardInfor} flex flex-col`}>
           <p className={style.groupTag}>{competitor.groups}</p>
