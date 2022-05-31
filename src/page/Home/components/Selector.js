@@ -1,24 +1,24 @@
-import React, { useContext } from 'react'
-import { FormContext } from '../Form'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { saving_fieldData } from '../formSlice'
 import { groups, years, months, days, cityList } from 'config'
 import style from './selector.module.scss'
 
 export default function Selector({ name = '', width = '' }) {
-  const { state, dispatch } = useContext(FormContext)
-  const { signUpData = {} } = state
+  const selectState = useSelector(state => state.form.signUpData[name])
+  const dispatch = useDispatch()
   const handleChange = e => {
-    dispatch({
-      type: 'SAVING_FIELD_DATA',
-      payload: {
+    dispatch(
+      saving_fieldData({
         fieldName: name,
         fieldValue: e.target.value.trim()
-      }
-    })
+      })
+    )
   }
 
+  const chosenCity = useSelector(state => state.form.signUpData.city)
   const createOption = () => {
     const cityArr = cityList.map(item => item.Name)
-
     switch (name) {
       case 'years':
         return commonOptionRender('西元年', years)
@@ -31,7 +31,7 @@ export default function Selector({ name = '', width = '' }) {
       case 'city':
         return commonOptionRender('請選擇縣市', cityArr)
       case 'district':
-        return districtOptionRender('請選擇鄉鎮', signUpData.city.value)
+        return districtOptionRender('請選擇鄉鎮', chosenCity.value)
       default:
         break
     }
@@ -39,10 +39,10 @@ export default function Selector({ name = '', width = '' }) {
 
   return (
     <div className={`flex flex-col ${width && style[updateClassName(width)]}`}>
-      <select id={name} value={signUpData[name].value} onChange={handleChange}>
+      <select id={name} value={selectState.value} onChange={handleChange}>
         {createOption()}
       </select>
-      {signUpData[name].error && <p className="errMsg"> {signUpData[name].error}</p>}
+      {selectState.error && <p className="errMsg"> {selectState.error}</p>}
     </div>
   )
 }
