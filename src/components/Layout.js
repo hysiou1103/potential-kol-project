@@ -2,10 +2,10 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import phoneLogo from 'imgs/phoneLogo.png'
 import banner from 'imgs/banner.png'
-import style from './home.module.scss'
+import style from './layout.module.scss'
 import { useLocation } from 'react-router-dom'
 
-export default function Home() {
+export default function Layout() {
   const { pathname } = useLocation()
 
   return (

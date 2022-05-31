@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FormContext } from './Form'
+import { FormContext } from '../Form'
 import { groups, years, months, days, cityList } from 'config'
 import style from './selector.module.scss'
 

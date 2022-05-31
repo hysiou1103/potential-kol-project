@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import uploadFile from 'imgs/uploadFile.png'
-import { FormContext } from './Form'
+import { FormContext } from '../Form'
 import style from './uploadPhotoSection.module.scss'
 
 export default function UploadPhotoSection({ placeHolder = {} }) {

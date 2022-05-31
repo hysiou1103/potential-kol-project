@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { FormContext } from './Form'
+import { FormContext } from '../Form'
 import style from './input.module.scss'
 
 export default function Input({ name = '', type = '', width = '', placeholder = '', maximun = 0 }) {
@@ -27,7 +27,7 @@ export default function Input({ name = '', type = '', width = '', placeholder = 
         value={signUpData[name].encryptValue || signUpData[name].value}
         onChange={handleChange}
       />
-      <p className={style.errMsg}> {signUpData[name].error}</p>
+      <p className="errMsg"> {signUpData[name].error}</p>
     </>
   )
 }

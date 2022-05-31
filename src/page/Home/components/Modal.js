@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
-import { FormContext } from './Form'
+import { FormContext } from '../Form'
 import style from './modal.module.scss'
 
 export default function Modal() {
