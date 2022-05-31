@@ -67,15 +67,14 @@ export default function VotingActive() {
           <div className={`${style.totalVotes} flex justify-center items-center w-full`}>
             目前總投票數：<strong>{totalVotes}</strong>票
           </div>
-          <img src={competitiveSituation} alt="Competitive Situation" />
+          <img src={competitiveSituation} alt="Competitive Situation" width={620} height={155} />
           <CountDown />
-
           <section className={`${style.takeLeadSection} flex justify-center items-center`}>
             {takeLeadGroup.map(competitor => (
               <TakeLeadCard key={competitor.id} competitor={competitor} />
             ))}
           </section>
-          <img src={votingSection} alt="voting section" />
+          <img src={votingSection} alt="voting section" width={620} height={155} />
           <section className={`${style.votingSectionWrap} w-full`}>
             <div className={`${style.searchingBar} flex justify-between`}>
               <div className={`${style.searchInputGroup} flex`}>

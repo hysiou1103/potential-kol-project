@@ -19,7 +19,7 @@ export default function Home() {
             width="44"
             height="44"
           />
-          <img src={banner} alt="2021 KOL TAIPEI FESTIVAL" />
+          <img src={banner} alt="2021 KOL TAIPEI FESTIVAL" width="960" height="1432" />
         </>
       )}
       <div className="container flex flex-col items-center w-full">

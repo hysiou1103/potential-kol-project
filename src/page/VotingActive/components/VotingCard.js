@@ -14,7 +14,7 @@ export default function VotingCard({ competitor = {} }) {
     >
       <p className={`${style.orderWrap} absolute z-1`}>NO.{competitor.id}</p>
       <div className={style.votingCardImg}>
-        <img src={competitor.photo1.src} alt="competitor" />
+        <img src={competitor.photo1.src} alt="competitor" width={150} height={150} />
       </div>
       <div
         className={`${style.votingIntro} ${

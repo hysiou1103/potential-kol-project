@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import AspectRatioBox from 'components/AspectRatioBox'
 import style from './Swiper.module.scss'
 
 export default function Swiper({ photoGroup = [], groups = '' }) {
@@ -23,7 +24,7 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
   const renderPhoto = renderItem => {
     return renderItem.map((item, index) => (
       <img
-        className={`absolute z-1 
+        className={`
           ${style.overlapImg} 
           ${index === activePhoto ? style.active : null}
         `}
@@ -56,7 +57,11 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
 
   return (
     <div className={`${style.swiperWrap} ${style[renderClass(groups)]} w-full relative z-0`}>
-      <div className={`${style.imgWrap} relative z-0`}>{renderPhoto(renderGroup)}</div>
+      <div className={`${style.imgWrap}`}>
+        <AspectRatioBox rateOfWidth={415} rateOfHeight={415}>
+          {renderPhoto(renderGroup)}
+        </AspectRatioBox>
+      </div>
       <ul className={`${style.selectDot} flex justify-center absolute z-1`} onClick={handleClick}>
         {renderPhotoSelector(renderGroup)}
       </ul>

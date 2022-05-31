@@ -14,17 +14,12 @@
   margin-right: auto;
   border-radius: 15px;
   max-width: 415px;
-  height: 415px;
   overflow: hidden;
-  transition: transform 0.5s ease-in-out;
   background-color: #f7f7f7;
 }
 
 .overlapImg {
   opacity: 0;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   transition: opacity 0.2s ease-in;
 
   &.active {

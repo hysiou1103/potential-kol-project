@@ -38,7 +38,13 @@ export default function Form() {
 
   return (
     <FormContext.Provider value={{ state, dispatch }}>
-      <img src={signUpForm} className={style.signUpImg} alt="Sign Up Form" />
+      <img
+        src={signUpForm}
+        className={style.signUpImg}
+        alt="Sign Up Form"
+        width={620}
+        height={155}
+      />
       <form className={`${style.formWrap} w-full`} onSubmit={checkForm}>
         <div className={`${style.inputGroup} flex`}>
           <label className="flex items-center" htmlFor="name">
