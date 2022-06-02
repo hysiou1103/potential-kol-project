@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import CountDown from './components/CountDown'
 import TakeLeadCard from './components/TakeLeadCard'
 import VotingCard from './components/VotingCard'
+import EmptyPage from './components/EmptyPage'
 import { groups } from 'config'
 import competitiveSituation from 'imgs/competitiveSituation.png'
 import votingSection from 'imgs/votingSection.png'
@@ -113,7 +114,7 @@ export default function VotingActive() {
           </section>
         </>
       ) : (
-        <div>目前還沒有資料section</div>
+        <EmptyPage />
       )}
     </>
   )
