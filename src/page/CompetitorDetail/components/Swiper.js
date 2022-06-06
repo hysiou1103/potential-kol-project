@@ -24,7 +24,9 @@ export default function Swiper({ photoGroup = [], groups = '' }) {
   const renderPhoto = renderItem => {
     return renderItem.map((item, index) => (
       <img
-        className={`${style.overlapImg} ${index === activePhoto ? style.active : null}`}
+        className={`${style.overlapImg} ${
+          index === activePhoto ? style.active : null
+        } absolute z-1`}
         key={item.fileName}
         src={item.src}
         alt="competitor"
