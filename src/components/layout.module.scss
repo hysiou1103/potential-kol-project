@@ -10,12 +10,10 @@
   }
 }
 
-.formSection {
-  padding-right: 15px;
-  padding-left: 15px;
+.childWrap {
+  min-height: calc(100vh - 50px);
 
   @include ipad {
-    padding: 0;
+    min-height: calc(100vh - 48px);
   }
-
 }

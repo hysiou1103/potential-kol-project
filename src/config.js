@@ -570,7 +570,7 @@ const validations = {
   }
 }
 
-export const executeValidationsOfInput = ({ fieldName, fieldValue }) => {
+export const executeValidationsOfField = ({ fieldName, fieldValue }) => {
   let errMsg = ''
   let hasError = false
   let encryptVal = ''

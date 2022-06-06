@@ -4,7 +4,7 @@ import style from './countDown.module.scss'
 export default function CountDown() {
   const [countDown, setCountDown] = useState(0)
   useEffect(() => {
-    const dueDate = new Date('2022/6/5 18:00:00').getTime()
+    const dueDate = new Date('2022/6/30 18:00:00').getTime()
     const interval = setInterval(() => {
       setCountDown(dueDate - new Date().getTime())
     }, 1000)

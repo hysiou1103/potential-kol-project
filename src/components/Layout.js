@@ -9,7 +9,7 @@ export default function Layout() {
   const { pathname } = useLocation()
 
   return (
-    <section className="flex flex-col items-center relative z-0">
+    <section className={`flex flex-col items-center relative z-0 ${style.childWrap}`}>
       {!pathname.includes('competitorDetail') && (
         <>
           <img
