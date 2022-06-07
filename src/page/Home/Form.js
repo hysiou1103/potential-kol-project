@@ -1,43 +1,35 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Input from './components/Input'
 import Selector from './components/Selector'
 import UploadPhotoSection from './components/UploadPhotoSection'
 import Modal from './components/Modal'
-import { executeValidationsOfField, validController } from 'config'
+import { update_isValid, saving_fieldData, initialize } from './formSlice'
 import signUpForm from 'imgs/signUpForm.png'
 import style from './form.module.scss'
 
 export default function Form() {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const { signUpData, photoIndex, isValid } = state
+  const dispatch = useDispatch()
+  const signUpData = useSelector(state => state.form.signUpData)
+  const isValid = useSelector(state => state.form.isValid)
+  const photoIndex = useSelector(state => state.form.photoIndex)
 
   const navigate = useNavigate()
   const checkForm = e => {
     e.preventDefault()
-    dispatch({ type: 'UPDATE_ISVALID' })
+    dispatch(update_isValid())
   }
 
   useEffect(() => {
     if (isValid) {
-      const { years, months, days, city, ...otherItems } = signUpData
-      const birthday = `${years.value}/${months.value}/${days.value}`
-      const storageList = JSON.parse(localStorage.getItem('registInfor')) || []
-      const tempStorageKey = Object.keys(otherItems)
-      let tempStorageData = {}
-      tempStorageKey.forEach(item => {
-        tempStorageData = { ...tempStorageData, [item]: otherItems[item].value || otherItems[item] }
-      })
-      tempStorageData.birthday = birthday
-      tempStorageData.id = storageList.length + 1
-      storageList.push(tempStorageData)
-      localStorage.setItem('registInfor', JSON.stringify(storageList))
+      dispatch(initialize())
       navigate(`/votingActive`)
     }
   }, [isValid])
 
   return (
-    <FormContext.Provider value={{ state, dispatch }}>
+    <>
       <img
         src={signUpForm}
         className={style.signUpImg}
@@ -145,10 +137,9 @@ export default function Form() {
               id="privacyPolicy"
               checked={signUpData.privacy.value}
               onChange={() => {
-                dispatch({
-                  type: 'SAVING_FIELD_DATA',
-                  payload: { fieldName: 'privacy', fieldValue: !signUpData.privacy.value }
-                })
+                dispatch(
+                  saving_fieldData({ fieldName: 'privacy', fieldValue: !signUpData.privacy.value })
+                )
               }}
             />
             <label htmlFor="privacyPolicy">
@@ -162,10 +153,12 @@ export default function Form() {
               id="portraitRights"
               checked={signUpData.portrait.value}
               onChange={() => {
-                dispatch({
-                  type: 'SAVING_FIELD_DATA',
-                  payload: { fieldName: 'portrait', fieldValue: !signUpData.portrait.value }
-                })
+                dispatch(
+                  saving_fieldData({
+                    fieldName: 'portrait',
+                    fieldValue: !signUpData.portrait.value
+                  })
+                )
               }}
             />
             <label htmlFor="portraitRights">
@@ -177,84 +170,6 @@ export default function Form() {
         <button className={`${style.formBtn}`}>送出報名</button>
         <Modal key={photoIndex} />
       </form>
-    </FormContext.Provider>
+    </>
   )
 }
-
-const reducer = (state, action) => {
-  const { signUpData, openModal } = state
-  let tempData = { ...signUpData }
-  switch (action.type) {
-    case 'UPDATE_PHOTOINDEX':
-      return { ...state, photoIndex: action.payload }
-    case 'UPDATE_ISVALID':
-      const { isValid, objectToBeTested } = validController(signUpData)
-      return { ...state, isValid: isValid, signUpData: { ...objectToBeTested } }
-    case 'CHANGE_MODAL_MODE':
-      return { ...state, openModal: !openModal }
-    case 'SAVING_FIELD_DATA':
-      const { errMsg, encryptVal, hasError } = executeValidationsOfField(action.payload)
-      tempData = { ...signUpData }
-      tempData[action.payload.fieldName].error = errMsg
-      tempData[action.payload.fieldName].hasError = hasError
-      tempData[action.payload.fieldName].value = action.payload.fieldValue
-
-      if (encryptVal) {
-        tempData[action.payload.fieldName].encryptValue = encryptVal
-      }
-
-      return { ...state, signUpData: { ...tempData } }
-    default:
-      return state
-  }
-}
-
-const initialState = {
-  openModal: false,
-  photoIndex: 'photo1',
-  isValid: false,
-  signUpData: {
-    name: { value: '', error: '', hasError: false },
-    email: { value: '', error: '', hasError: false, encryptValue: '' },
-    phone: { value: '', error: '', hasError: false },
-    groups: { value: 'default', error: '', hasError: false },
-    competitionID: { value: '', error: '', hasError: false },
-    selfIntro: { value: '', error: '', hasError: false },
-    years: { value: 'default', error: '', hasError: false },
-    months: { value: 'default', error: '', hasError: false },
-    days: { value: 'default', error: '', hasError: false },
-    city: { value: 'default', error: '', hasError: false },
-    district: { value: 'default', error: '', hasError: false },
-    detailAddress: { value: '', error: '', hasError: false },
-    photo1: {
-      value: {
-        src: '',
-        fileName: '上傳檔案'
-      },
-      error: '',
-      hasError: false
-    },
-    photo2: {
-      value: {
-        src: '',
-        fileName: '上傳檔案'
-      },
-      error: '',
-      hasError: false
-    },
-    photo3: {
-      value: {
-        src: '',
-        fileName: '上傳檔案'
-      },
-      error: '',
-      hasError: false
-    },
-    privacy: { value: false, error: '', hasError: false },
-    portrait: { value: false, error: '', hasError: false },
-    birthday: '',
-    votes: 0
-  }
-}
-
-export const FormContext = React.createContext()

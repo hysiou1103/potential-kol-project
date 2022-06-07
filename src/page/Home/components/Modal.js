@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
-import { FormContext } from '../Form'
+import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { change_modalMode, saving_fieldData } from '../formSlice'
 import style from './modal.module.scss'
 
 export default function Modal() {
-  const { state, dispatch } = useContext(FormContext)
-  const { openModal = false, signUpData = {}, photoIndex = 'photo1' } = state
+  const dispatch = useDispatch()
+  const { openModal, signUpData, photoIndex } = useSelector(state => state.form)
   const photoPosition = signUpData[photoIndex]
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function Modal() {
     }
   }
   const modalController = status => {
-    dispatch({ type: 'CHANGE_MODAL_MODE' })
+    dispatch(change_modalMode())
     if (status === 'cancel') {
       setPhotoObj({
         src: '',
@@ -45,13 +46,12 @@ export default function Modal() {
       imgUpload.current.value = ''
       return
     }
-    dispatch({
-      type: 'SAVING_FIELD_DATA',
-      payload: {
+    dispatch(
+      saving_fieldData({
         fieldName: photoIndex,
         fieldValue: photoObj
-      }
-    })
+      })
+    )
   }
 
   return (

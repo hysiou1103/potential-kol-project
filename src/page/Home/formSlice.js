@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { executeValidationsOfInput, validController } from 'config'
+import { executeValidationsOfField, validController } from 'config'
 
 const initialState = {
   openModal: false,
@@ -46,7 +46,8 @@ const initialState = {
     portrait: { value: false, error: '', hasError: false },
     birthday: '',
     votes: 0
-  }
+  },
+  storageList: JSON.parse(localStorage.getItem('registInfor')) || []
 }
 
 const formSlice = createSlice({
@@ -56,14 +57,11 @@ const formSlice = createSlice({
     update_photoIndex: (state, action) => {
       state.photoIndex = action.payload
     },
-    update_isValid: state => {
-      state.isValid = !state.isValid
-    },
     change_modalMode: state => {
       state.openModal = !state.openModal
     },
     saving_fieldData: (state, action) => {
-      const { errMsg, encryptVal, hasError } = executeValidationsOfInput(action.payload)
+      const { errMsg, encryptVal, hasError } = executeValidationsOfField(action.payload)
       state.signUpData[action.payload.fieldName].error = errMsg
       state.signUpData[action.payload.fieldName].hasError = hasError
       state.signUpData[action.payload.fieldName].value = action.payload.fieldValue
@@ -71,11 +69,35 @@ const formSlice = createSlice({
       if (encryptVal) {
         state.signUpData[action.payload.fieldName].encryptValue = encryptVal
       }
+    },
+    update_isValid: state => {
+      const { isValid, objectToBeTested } = validController(state.signUpData)
+      state.isValid = isValid
+      if (isValid) {
+        const { years, months, days, city, ...otherItems } = objectToBeTested
+        const birthday = `${years.value}/${months.value}/${days.value}`
+        const tempStorageKey = Object.keys(otherItems)
+        let tempStorageData = {}
+        tempStorageKey.forEach(item => {
+          tempStorageData = {
+            ...tempStorageData,
+            [item]: otherItems[item].value || otherItems[item]
+          }
+        })
+        tempStorageData.birthday = birthday
+        tempStorageData.id = state.storageList.length + 1
+        state.storageList.push(tempStorageData)
+        localStorage.setItem('registInfor', JSON.stringify(state.storageList))
+      }
+    },
+    initialize: state => {
+      const { storageList, ...initialize } = initialState
+      return { ...initialize, storageList: state.storageList }
     }
   }
 })
 
-export const { update_photoIndex, date_isValid, change_modalMode, saving_fieldData } =
+export const { update_photoIndex, update_isValid, change_modalMode, saving_fieldData, initialize } =
   formSlice.actions
 
 export default formSlice.reducer

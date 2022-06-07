@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import uploadFile from 'imgs/uploadFile.png'
-import { FormContext } from '../Form'
+import { useDispatch, useSelector } from 'react-redux'
+import { change_modalMode, update_photoIndex } from '../formSlice'
 import style from './uploadPhotoSection.module.scss'
 
 export default function UploadPhotoSection({ placeHolder = {} }) {
-  const { state, dispatch } = useContext(FormContext)
-  const { signUpData = {} } = state
-  const name = placeHolder.value
+  const dispatch = useDispatch()
+  const chosenModal = useSelector(state => state.form.signUpData[placeHolder.value])
   return (
     <>
       <label className="flex items-center">上傳{placeHolder.label}</label>
@@ -14,13 +14,8 @@ export default function UploadPhotoSection({ placeHolder = {} }) {
         <button
           className={`${style.uploadBtn} flex justify-center items-center`}
           onClick={() => {
-            dispatch({
-              type: 'UPDATE_PHOTOINDEX',
-              payload: placeHolder.value
-            })
-            dispatch({
-              type: 'CHANGE_MODAL_MODE'
-            })
+            dispatch(update_photoIndex(placeHolder.value))
+            dispatch(change_modalMode())
           }}
         >
           <img src={uploadFile} alt="Upload File Icon" width="22" height="15" />
@@ -28,8 +23,8 @@ export default function UploadPhotoSection({ placeHolder = {} }) {
         </button>
         <div className={style.fileInfor}>
           <div className="flex items-center">
-            <p>{signUpData[name].value.fileName ? signUpData[name].value.fileName : null}</p>
-            {signUpData[name].error && <span className="errMsg"> {signUpData[name].error}</span>}
+            <p>{chosenModal.value.fileName ? chosenModal.value.fileName : null}</p>
+            {chosenModal.error && <span className="errMsg"> {chosenModal.error}</span>}
           </div>
           <p>檔案大小不得超過5MB，建議尺寸為正方形(最少1張、最多3張)</p>
         </div>
