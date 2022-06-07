@@ -4,7 +4,7 @@ import Input from './components/Input'
 import Selector from './components/Selector'
 import UploadPhotoSection from './components/UploadPhotoSection'
 import Modal from './components/Modal'
-import { executeValidationsOfInput, validController } from 'config'
+import { executeValidationsOfField, validController } from 'config'
 import signUpForm from 'imgs/signUpForm.png'
 import style from './form.module.scss'
 
@@ -193,7 +193,7 @@ const reducer = (state, action) => {
     case 'CHANGE_MODAL_MODE':
       return { ...state, openModal: !openModal }
     case 'SAVING_FIELD_DATA':
-      const { errMsg, encryptVal, hasError } = executeValidationsOfInput(action.payload)
+      const { errMsg, encryptVal, hasError } = executeValidationsOfField(action.payload)
       tempData = { ...signUpData }
       tempData[action.payload.fieldName].error = errMsg
       tempData[action.payload.fieldName].hasError = hasError

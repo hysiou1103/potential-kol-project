@@ -9,8 +9,8 @@ export default function Layout() {
   const { pathname } = useLocation()
 
   return (
-    <section className="flex flex-col items-center relative z-0">
-      {!pathname.includes('competitorDetail') && (
+    <section className={`flex flex-col items-center relative z-0 ${style.childWrap}`}>
+      {pathname.includes('competitorDetail') ? null : (
         <>
           <img
             src={phoneLogo}

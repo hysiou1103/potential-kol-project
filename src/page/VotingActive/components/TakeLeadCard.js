@@ -17,7 +17,7 @@ export default function TakeLeadCard({ competitor = {} }) {
         <img src={crownIcon} alt="Crown Icon" width="60" height="60" />
       </div>
       <div className={style.leadCardImg}>
-        <img src={competitor.photo1.src} alt="competitor" width="280" height="280" />
+        <img src={competitor.photo1.src} alt="competitor" width="100%" height="100%" />
       </div>
       <p className={`${style.eachGroup} ${style[updateClass(competitor)]}`}>{competitor.groups}</p>
       <div className={style.leadInfor}>
