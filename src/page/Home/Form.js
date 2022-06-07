@@ -45,7 +45,7 @@ export default function Form() {
         width={620}
         height={155}
       />
-      <form className={`${style.formWrap} w-full`} onSubmit={checkForm}>
+      <div className={`${style.formWrap} w-full`}>
         <div className={`${style.inputGroup} flex`}>
           <label className="flex items-center" htmlFor="name">
             姓名
@@ -174,9 +174,11 @@ export default function Form() {
             </label>
           </div>
         </div>
-        <button className={`${style.formBtn}`}>送出報名</button>
+        <button className={style.formBtn} onClick={checkForm}>
+          送出報名
+        </button>
         <Modal key={photoIndex} />
-      </form>
+      </div>
     </FormContext.Provider>
   )
 }

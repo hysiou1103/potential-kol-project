@@ -5,11 +5,15 @@ export default function CountDown() {
   const [countDown, setCountDown] = useState(0)
   useEffect(() => {
     const dueDate = new Date('2022/6/30 18:00:00').getTime()
-    const interval = setInterval(() => {
-      setCountDown(dueDate - new Date().getTime())
-    }, 1000)
-    getFormatDate(countDown)
-    return () => clearInterval(interval)
+    const restTime = dueDate - new Date().getTime()
+    if (restTime > 0) {
+      const interval = setInterval(() => {
+        setCountDown(restTime)
+      }, 1000)
+
+      getFormatDate(countDown)
+      return () => clearInterval(interval)
+    }
   }, [countDown])
 
   const [days, setDays] = useState(0)
