@@ -576,20 +576,21 @@ export const executeValidationsOfField = ({ fieldName, fieldValue }) => {
   let encryptVal = ''
   const verifiedItem = validations[fieldName]
   if (verifiedItem) {
-    //required
-    if (verifiedItem.required && !fieldValue) {
+    //Required
+    if (verifiedItem.required && fieldValue === '') {
       errMsg = '此欄位為必填項目'
       hasError = true
     }
+
     //Pattern
     const pattern = verifiedItem.pattern
-    if (fieldValue && pattern && !pattern.RegExp.test(fieldValue)) {
+    if (!hasError && pattern && !pattern.RegExp.test(fieldValue)) {
       hasError = true
       errMsg = pattern.message
     }
 
     //Encryption
-    if (fieldValue && !hasError && verifiedItem.encryption) {
+    if (!hasError && verifiedItem.encryption) {
       encryptVal = verifiedItem.encryption.excryFn(fieldValue)
     }
   }

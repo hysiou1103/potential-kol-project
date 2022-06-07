@@ -25,7 +25,6 @@ export default function CompetitorDetail() {
     setCompetitorData(...data)
   }, [])
 
-  const [clickAnimation, setClickAnimation] = useState(false)
   const handleVotes = () => {
     const dailyVotingLimit = 2
     if (counter < dailyVotingLimit) {
@@ -36,16 +35,9 @@ export default function CompetitorDetail() {
       const tempCounter = counter + 1
       setCounter(tempCounter)
 
-      setClickAnimation(!clickAnimation)
       updateStorage(tempData, tempCounter)
     }
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      setClickAnimation(!setClickAnimation)
-    }, 300)
-  }, [clickAnimation])
 
   const updateStorage = (tempData, tempCounter) => {
     const tempList = [...listInBrowser]
@@ -85,29 +77,31 @@ export default function CompetitorDetail() {
           <div className={style.tagWrap}>
             <div className={style.groupTag}>{groups}</div>
           </div>
-          <div className={`${style.competitorContent} h-full flex flex-col justify-around`}>
+          <div className="h-full flex flex-col justify-around">
             <div className={style.competitorHeader}>
               <p className={style.competitonID}>{competitionID}</p>
               <p className={style.competitorOrder}>NO.{id}</p>
             </div>
-            <div className={style.introSection}>
+            <div>
               <p className={style.introTitle}>介紹</p>
               <p className={style.introContent}>{selfIntro}</p>
             </div>
-            <div className={style.currentVotes}>
+            <p className={style.currentVotes}>
               目前票數 <strong>{votes}</strong> 票
-            </div>
-            <button
-              className={`${style.getingVotes} ${clickAnimation ? style.active : ''} ${
-                counter === 2 ? style.disabled : ''
-              } relative z-0`}
-              onClick={handleVotes}
-            >
-              投我一票
-            </button>
-            <p className={style.reminderText}>
-              不限次數分享，分享1次加1票，最多加<strong>2</strong>票
             </p>
+            <div className={`${style.btnWrap} flex flex-col items-center`}>
+              <button
+                className={`${style.getingVotes} ${
+                  counter === 2 ? style.disabled : ''
+                } relative z-0`}
+                onClick={handleVotes}
+              >
+                投我一票
+              </button>
+              <p className={style.reminderText}>
+                不限次數分享，分享1次加1票，最多加<strong>2</strong>票
+              </p>
+            </div>
           </div>
         </div>
       </div>

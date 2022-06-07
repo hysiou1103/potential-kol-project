@@ -87,6 +87,8 @@
 
 .competitorOrder {
   font-size: 1.6rem;
+  padding-top: 5px;
+  padding-bottom: 5px;
   color: #5d5d5d;
 }
 
@@ -116,8 +118,6 @@
 }
 
 .getingVotes {
-  margin-left: auto;
-  margin-right: auto;
   padding: 5px 10px;
   border-radius: 5px 5px 0 0;
   width: 145px;
@@ -139,10 +139,9 @@
     height: 5px;
     width: 100%;
     transition: height 0.1s ease;
-
   }
 
-  &.active.getingVotes {
+  &:active {
     transform: translateY(3px);
 
 
@@ -193,7 +192,7 @@
 
     @include ipad {
       display: flex;
-      margin-top: 50px;
+      margin-top: 20px;
     }
   }
 
@@ -208,4 +207,8 @@
       position: inherit;
     }
   }
+}
+
+.btnWrap {
+  padding: 40px 0;
 }
