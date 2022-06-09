@@ -6,7 +6,7 @@ import style from './uploadPhotoSection.module.scss'
 
 export default function UploadPhotoSection({ placeHolder = {} }) {
   const dispatch = useDispatch()
-  const chosenModal = useSelector(state => state.form.signUpData[placeHolder.value])
+  const chosenModal = useSelector(state => state.signUpData[placeHolder.value])
   return (
     <>
       <label className="flex items-center">上傳{placeHolder.label}</label>

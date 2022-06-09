@@ -2,7 +2,5 @@ import { configureStore } from '@reduxjs/toolkit' //automatically combine your s
 import formReducer from 'page/Home/formSlice'
 
 export const store = configureStore({
-  reducer: {
-    form: formReducer
-  }
+  reducer: formReducer
 })

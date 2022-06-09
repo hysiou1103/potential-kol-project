@@ -5,7 +5,7 @@ import { groups, years, months, days, cityList } from 'config'
 import style from './selector.module.scss'
 
 export default function Selector({ name = '', width = '' }) {
-  const selectState = useSelector(state => state.form.signUpData[name])
+  const selectState = useSelector(state => state.signUpData[name])
   const dispatch = useDispatch()
   const handleChange = e => {
     dispatch(
@@ -16,7 +16,7 @@ export default function Selector({ name = '', width = '' }) {
     )
   }
 
-  const chosenCity = useSelector(state => state.form.signUpData.city)
+  const chosenCity = useSelector(state => state.signUpData.city)
   const createOption = () => {
     const cityArr = cityList.map(item => item.Name)
     switch (name) {

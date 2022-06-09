@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import CountDown from './components/CountDown'
 import TakeLeadCard from './components/TakeLeadCard'
 import VotingCard from './components/VotingCard'
@@ -10,10 +11,10 @@ import search from 'imgs/search.png'
 import style from './votingActive.module.scss'
 
 export default function VotingActive() {
+  const votingList = useSelector(state => state.storageList)
   const [reorderList, setReorderList] = useState([])
   useEffect(() => {
-    const votingList = JSON.parse(localStorage.getItem('registInfor')) || []
-    const reorderListWithHigherVotes = votingList.sort((a, b) => {
+    const reorderListWithHigherVotes = [...votingList].sort((a, b) => {
       return b.votes - a.votes
     })
     setReorderList(reorderListWithHigherVotes)
@@ -44,7 +45,7 @@ export default function VotingActive() {
 
   const [chosenGroup, setChosenGroup] = useState('ALL')
   const handleGroupsClick = e => {
-    if (e.target.nodeName == 'LI') {
+    if (e.target.nodeName === 'LI') {
       let newGroup = e.target.innerText
       setChosenGroup(newGroup)
       setSearchKeyword('')

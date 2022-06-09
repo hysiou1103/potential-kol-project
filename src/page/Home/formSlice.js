@@ -90,6 +90,10 @@ const formSlice = createSlice({
         localStorage.setItem('registInfor', JSON.stringify(state.storageList))
       }
     },
+    update_storage: (state, action) => {
+      localStorage.setItem('registInfor', JSON.stringify(action.payload))
+      return { ...state, storageList: [...action.payload] }
+    },
     initialize: state => {
       const { storageList, ...initialize } = initialState
       return { ...initialize, storageList: state.storageList }
@@ -97,7 +101,13 @@ const formSlice = createSlice({
   }
 })
 
-export const { update_photoIndex, update_isValid, change_modalMode, saving_fieldData, initialize } =
-  formSlice.actions
+export const {
+  update_photoIndex,
+  update_isValid,
+  change_modalMode,
+  saving_fieldData,
+  update_storage,
+  initialize
+} = formSlice.actions
 
 export default formSlice.reducer

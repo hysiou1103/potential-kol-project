@@ -5,7 +5,7 @@ import style from './input.module.scss'
 
 export default function Input({ name = '', type = '', width = '', placeholder = '', maximun = 0 }) {
   const dispatch = useDispatch()
-  const inputState = useSelector(state => state.form.signUpData[name])
+  const inputState = useSelector(state => state.signUpData[name])
 
   const handleChange = e => {
     dispatch(

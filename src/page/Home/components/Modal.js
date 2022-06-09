@@ -5,7 +5,7 @@ import style from './modal.module.scss'
 
 export default function Modal() {
   const dispatch = useDispatch()
-  const { openModal, signUpData, photoIndex } = useSelector(state => state.form)
+  const { openModal, signUpData, photoIndex } = useSelector(state => state)
   const photoPosition = signUpData[photoIndex]
 
   useEffect(() => {

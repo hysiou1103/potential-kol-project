@@ -11,9 +11,9 @@ import style from './form.module.scss'
 
 export default function Form() {
   const dispatch = useDispatch()
-  const signUpData = useSelector(state => state.form.signUpData)
-  const isValid = useSelector(state => state.form.isValid)
-  const photoIndex = useSelector(state => state.form.photoIndex)
+  const signUpData = useSelector(state => state.signUpData)
+  const isValid = useSelector(state => state.isValid)
+  const photoIndex = useSelector(state => state.photoIndex)
 
   const navigate = useNavigate()
   const checkForm = e => {
@@ -37,7 +37,7 @@ export default function Form() {
         width={620}
         height={155}
       />
-      <form className={`${style.formWrap} w-full`} onSubmit={checkForm}>
+      <div className={`${style.formWrap} w-full`}>
         <div className={`${style.inputGroup} flex`}>
           <label className="flex items-center" htmlFor="name">
             姓名
@@ -167,9 +167,11 @@ export default function Form() {
             </label>
           </div>
         </div>
-        <button className={`${style.formBtn}`}>送出報名</button>
+        <button className={style.formBtn} onClick={checkForm}>
+          送出報名
+        </button>
         <Modal key={photoIndex} />
-      </form>
+      </div>
     </>
   )
 }

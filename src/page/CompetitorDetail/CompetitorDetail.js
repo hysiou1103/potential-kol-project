@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
 import Swiper from './components/Swiper'
+import { update_storage } from 'page/Home/formSlice'
 import goBack from 'imgs/goBack.png'
 import style from './competitorDetail.module.scss'
 
 export default function CompetitorDetail() {
   const { competitorId } = useParams()
-
-  const [listInBrowser, setListInBrowser] = useState([])
   const [counter, setCounter] = useState(0)
   const [competitorData, setCompetitorData] = useState({})
   const { groups, competitionID, id, selfIntro, votes, photo1, photo2, photo3 } = competitorData
-
+  const votingList = useSelector(state => state.storageList)
   useEffect(() => {
     const votingCounts = JSON.parse(localStorage.getItem('counterRecord')) || {}
     if (votingCounts[today]) {
       const counts = parseInt(votingCounts[today].voting)
       setCounter(counts)
     }
-    const votingList = JSON.parse(localStorage.getItem('registInfor')) || []
     const data = votingList.filter(item => item.id === parseInt(competitorId))
-    setListInBrowser([...votingList])
     setCompetitorData(...data)
   }, [])
 
@@ -39,13 +36,11 @@ export default function CompetitorDetail() {
     }
   }
 
+  const dispatch = useDispatch()
   const updateStorage = (tempData, tempCounter) => {
-    const tempList = [...listInBrowser]
+    const tempList = [...votingList]
     tempList.splice(tempData.id - 1, 1, tempData)
-    setListInBrowser(tempList)
-    localStorage.removeItem('registInfor')
-    localStorage.setItem('registInfor', JSON.stringify(tempList))
-
+    dispatch(update_storage(tempList))
     const tempRecord = {
       [today]: {
         voting: tempCounter
